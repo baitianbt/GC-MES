@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36202.13 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.WinForm", "GC-MES.WinForm\GC-MES.WinForm.csproj", "{7A64248C-8875-461B-8190-6CB90C2C7CE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{9FA3D6BD-1EC1-3BA5-80CB-CE02773A58D5}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.Upgrade", "GC-MES.Upgrade\GC-MES.Upgrade.csproj", "{E86BAF9F-EAC0-49D0-9964-C84AC94722B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.BLL", "GC-MES.BLL\GC-MES.BLL.csproj", "{D8C9407C-82E8-46A9-9D4F-BE0E4AD7D53D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.DAL", "GC-MES.DAL\GC-MES.DAL.csproj", "{B2CE0491-82AD-49FE-8964-1344746150D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.Model", "GC-MES.Model\GC-MES.Model.csproj", "{51421045-521F-4E15-8389-4904A5630E9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.Common", "GC-MES.Common\GC-MES.Common.csproj", "{1BA7C452-0134-418A-90B1-A9A83BC93B10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A64248C-8875-461B-8190-6CB90C2C7CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A64248C-8875-461B-8190-6CB90C2C7CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A64248C-8875-461B-8190-6CB90C2C7CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A64248C-8875-461B-8190-6CB90C2C7CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E86BAF9F-EAC0-49D0-9964-C84AC94722B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E86BAF9F-EAC0-49D0-9964-C84AC94722B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E86BAF9F-EAC0-49D0-9964-C84AC94722B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E86BAF9F-EAC0-49D0-9964-C84AC94722B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8C9407C-82E8-46A9-9D4F-BE0E4AD7D53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8C9407C-82E8-46A9-9D4F-BE0E4AD7D53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8C9407C-82E8-46A9-9D4F-BE0E4AD7D53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8C9407C-82E8-46A9-9D4F-BE0E4AD7D53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2CE0491-82AD-49FE-8964-1344746150D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2CE0491-82AD-49FE-8964-1344746150D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2CE0491-82AD-49FE-8964-1344746150D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2CE0491-82AD-49FE-8964-1344746150D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51421045-521F-4E15-8389-4904A5630E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51421045-521F-4E15-8389-4904A5630E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51421045-521F-4E15-8389-4904A5630E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51421045-521F-4E15-8389-4904A5630E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BA7C452-0134-418A-90B1-A9A83BC93B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA7C452-0134-418A-90B1-A9A83BC93B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA7C452-0134-418A-90B1-A9A83BC93B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA7C452-0134-418A-90B1-A9A83BC93B10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0C61E9A-3BF3-4FB8-95BD-47FC7D90ED3B}
+	EndGlobalSection
+EndGlobal
