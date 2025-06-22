@@ -300,6 +300,11 @@ namespace GC_MES.WinForm.Forms
                         childControl = CreateUserManagementForm();
                         break;
                         
+                    case "WorkOrderManagement":
+                        // 创建工单管理界面
+                        childControl = Program.ServiceProvider.GetService<WorkOrderManagementForm>();
+                        break;
+                        
                     default:
                         // 默认创建一个空白面板
                         Panel defaultPanel = new Panel();
@@ -363,7 +368,7 @@ namespace GC_MES.WinForm.Forms
         private void btnWorkOrders_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm("WorkOrders", null);
+            OpenChildForm("WorkOrderManagement", null);
         }
         
         private void btnInventory_Click(object sender, EventArgs e)

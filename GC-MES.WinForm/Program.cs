@@ -59,6 +59,19 @@ namespace GC_MES.WinForm
             // 手动注册窗体
             services.AddScoped<LoginForm>();
             services.AddScoped<MainForm>();
+            services.AddScoped<UserManagementForm>();
+            services.AddScoped<WorkOrderManagementForm>();
+            services.AddScoped<RoleManagementForm>();
+            services.AddScoped<PermissionManagementForm>();
+            services.AddScoped<RolePermissionForm>();
+            services.AddScoped<RoleEditForm>();
+            services.AddScoped<ProductManagementForm>();
+            services.AddScoped<ProductEditForm>();
+            services.AddScoped<BOMManagementForm>();
+            services.AddScoped<BOMEditForm>();
+            services.AddScoped<RoutingManagementForm>();
+            services.AddScoped<RoutingEditForm>();
+            services.AddScoped<OperationManagementForm>();
             // 也可以自动注册所有窗体
             // services.AutoRegisterForms("GC_MES.WinForm");
 
