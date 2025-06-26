@@ -72,6 +72,17 @@ namespace GC_MES.WinForm
             services.AddScoped<RoutingManagementForm>();
             services.AddScoped<RoutingEditForm>();
             services.AddScoped<OperationManagementForm>();
+            
+            // 质量模块相关窗体
+            services.AddScoped<QualityInspectionManagementForm>();
+            services.AddScoped<QualityInspectionEditForm>();
+            services.AddScoped<QualityInspectionItemEditForm>();
+            services.AddScoped<QualityInspectionDetailForm>();
+            services.AddScoped<NonconformingProductForm>();
+            services.AddScoped<QualityStandardManagementForm>();
+            services.AddScoped<QualityStandardEditForm>();
+            services.AddScoped<QualityStandardItemEditForm>();
+            
             // 也可以自动注册所有窗体
             // services.AutoRegisterForms("GC_MES.WinForm");
 

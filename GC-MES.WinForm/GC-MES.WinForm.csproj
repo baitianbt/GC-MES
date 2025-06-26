@@ -150,6 +150,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\BOMEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BOMEditForm.Designer.cs">
+      <DependentUpon>BOMEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BOMManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BOMManagementForm.Designer.cs">
+      <DependentUpon>BOMManagementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +186,18 @@
     <Compile Include="Forms\PermissionManagementForm.Designer.cs">
       <DependentUpon>PermissionManagementForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProductEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProductEditForm.Designer.cs">
+      <DependentUpon>ProductEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProductManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProductManagementForm.Designer.cs">
+      <DependentUpon>ProductManagementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RoleEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +215,18 @@
     </Compile>
     <Compile Include="Forms\RolePermissionForm.Designer.cs">
       <DependentUpon>RolePermissionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RoutingEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RoutingEditForm.Designer.cs">
+      <DependentUpon>RoutingEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RoutingManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RoutingManagementForm.Designer.cs">
+      <DependentUpon>RoutingManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ThemeManager.cs" />
     <Compile Include="Forms\UserEditForm.cs">
@@ -213,17 +249,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BOMEditForm.resx">
+      <DependentUpon>BOMEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BOMManagementForm.resx">
+      <DependentUpon>BOMManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProductManagementForm.resx">
+      <DependentUpon>ProductManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RoleEditForm.resx">
       <DependentUpon>RoleEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RolePermissionForm.resx">
       <DependentUpon>RolePermissionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RoutingManagementForm.resx">
+      <DependentUpon>RoutingManagementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserEditForm.resx">
       <DependentUpon>UserEditForm.cs</DependentUpon>

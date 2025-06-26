@@ -21,6 +21,11 @@ namespace GC_MES.WinForm.Forms
         // 用于存储打开的窗体
         private Dictionary<string, Form> openForms = new Dictionary<string, Form>();
         
+        // 子菜单面板字典
+        private Dictionary<Button, Panel> subMenuPanels = new Dictionary<Button, Panel>();
+        // 当前展开的子菜单面板
+        private Panel currentSubMenuPanel = null;
+        
         // 依赖注入
         public MainForm(ILogger<MainForm> logger, IConfiguration configuration)
         {
@@ -30,6 +35,9 @@ namespace GC_MES.WinForm.Forms
             
             // 初始化图标
             InitializeMenuIcons();
+            
+            // 初始化子菜单
+            InitializeSubMenus();
             
             // 设置默认活动按钮
             ActivateButton(btnDashboard);
@@ -51,7 +59,510 @@ namespace GC_MES.WinForm.Forms
                     ThemeManager.ApplyTheme(form);
             }
             
+            // 应用到子菜单
+            foreach (var panel in subMenuPanels.Values)
+            {
+                ApplyThemeToSubMenu(panel);
+            }
+            
             _logger.LogInformation($"主题已切换为: {e.ThemeType}");
+        }
+        
+        /// <summary>
+        /// 应用主题到子菜单
+        /// </summary>
+        private void ApplyThemeToSubMenu(Panel subMenuPanel)
+        {
+            if (subMenuPanel == null) return;
+            
+            Color btnBackColor = Color.FromArgb(42, 57, 76); // 深一点的背景色
+            Color btnForeColor = Color.Gainsboro;
+            
+            switch (ThemeManager.CurrentTheme)
+            {
+                case ThemeType.Dark:
+                    btnBackColor = Color.FromArgb(42, 57, 76);
+                    btnForeColor = Color.Gainsboro;
+                    break;
+                case ThemeType.Light:
+                    btnBackColor = Color.FromArgb(230, 230, 230);
+                    btnForeColor = Color.Black;
+                    break;
+                case ThemeType.Blue:
+                    btnBackColor = Color.FromArgb(0, 102, 184);
+                    btnForeColor = Color.White;
+                    break;
+                case ThemeType.Green:
+                    btnBackColor = Color.FromArgb(20, 120, 60);
+                    btnForeColor = Color.White;
+                    break;
+            }
+            
+            subMenuPanel.BackColor = btnBackColor;
+            
+            foreach (Control control in subMenuPanel.Controls)
+            {
+                if (control is Button btn)
+                {
+                    btn.BackColor = btnBackColor;
+                    btn.ForeColor = btnForeColor;
+                    btn.FlatAppearance.BorderColor = btnBackColor;
+                    btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(btnBackColor.R + 20, btnBackColor.G + 20, btnBackColor.B + 20);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 初始化子菜单
+        /// </summary>
+        private void InitializeSubMenus()
+        {
+            // 质量模块子菜单
+            CreateSubMenu(btnQuality, new string[] { 
+                "质量检验管理", "质量标准管理", "不合格品管理", "质量统计报表" 
+            });
+            
+            // 生产模块子菜单
+            CreateSubMenu(btnProduction, new string[] { 
+                "生产任务", "生产进度", "工序操作", "生产报工" 
+            });
+            
+            // 计划模块子菜单
+            CreateSubMenu(btnPlanning, new string[] { 
+                "生产计划", "物料需求计划", "排程管理", "能力分析" 
+            });
+            
+            // 仓储模块子菜单
+            CreateSubMenu(btnInventory, new string[] { 
+                "库存管理", "入库管理", "出库管理", "库位管理", "盘点管理" 
+            });
+            
+            // 系统设置子菜单
+            CreateSubMenu(btnSettings, new string[] { 
+                "基础参数", "系统配置", "主题设置", "数据备份", "系统日志" 
+            });
+            
+            // 用户管理子菜单
+            CreateSubMenu(btnUserManage, new string[] { 
+                "用户管理", "角色管理", "权限管理", "部门管理" 
+            });
+        }
+        
+        /// <summary>
+        /// 创建子菜单面板
+        /// </summary>
+        private void CreateSubMenu(Button parentButton, string[] menuItems)
+        {
+            if (parentButton == null || menuItems == null || menuItems.Length == 0)
+                return;
+            
+            // 创建子菜单面板
+            Panel subMenuPanel = new Panel();
+            subMenuPanel.Dock = DockStyle.None;
+            subMenuPanel.AutoSize = true;
+            subMenuPanel.BackColor = Color.FromArgb(42, 57, 76); // 比主菜单深一点的颜色
+            subMenuPanel.Visible = false;
+            
+            // 设置子菜单面板的位置
+            subMenuPanel.Location = new Point(parentButton.Right, parentButton.Top);
+            
+            // 创建子菜单项
+            int buttonHeight = 40;
+            int panelWidth = 180;
+            
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                Button subButton = new Button();
+                subButton.Text = menuItems[i];
+                subButton.Size = new Size(panelWidth, buttonHeight);
+                subButton.Location = new Point(0, i * buttonHeight);
+                subButton.FlatStyle = FlatStyle.Flat;
+                subButton.FlatAppearance.BorderSize = 0;
+                subButton.BackColor = Color.FromArgb(42, 57, 76);
+                subButton.ForeColor = Color.Gainsboro;
+                subButton.TextAlign = ContentAlignment.MiddleLeft;
+                subButton.Padding = new Padding(20, 0, 0, 0);
+                subButton.Tag = parentButton.Text + "." + menuItems[i]; // 存储完整的菜单路径
+                subButton.Click += SubMenuItem_Click;
+                
+                subMenuPanel.Controls.Add(subButton);
+            }
+            
+            // 调整面板大小
+            subMenuPanel.Size = new Size(panelWidth, buttonHeight * menuItems.Length);
+            
+            // 添加到父容器
+            this.Controls.Add(subMenuPanel);
+            subMenuPanel.BringToFront();
+            
+            // 存储子菜单面板引用
+            subMenuPanels[parentButton] = subMenuPanel;
+            
+            // 修改父按钮点击事件
+            parentButton.Click -= GetEventHandler(parentButton);
+            parentButton.Click += ParentMenuItem_Click;
+        }
+        
+        /// <summary>
+        /// 获取按钮原有的点击事件处理器
+        /// </summary>
+        private EventHandler GetEventHandler(Button button)
+        {
+            if (button == btnDashboard) return btnDashboard_Click;
+            else if (button == btnWorkOrders) return btnWorkOrders_Click;
+            else if (button == btnInventory) return btnInventory_Click;
+            else if (button == btnPlanning) return btnPlanning_Click;
+            else if (button == btnProduction) return btnProduction_Click;
+            else if (button == btnQuality) return btnQuality_Click;
+            else if (button == btnMaintenance) return btnMaintenance_Click;
+            else if (button == btnReports) return btnReports_Click;
+            else if (button == btnSettings) return btnSettings_Click;
+            else if (button == btnUserManage) return btnUserManage_Click;
+            else if (button == btnLogout) return btnLogout_Click;
+            else return null;
+        }
+        
+        /// <summary>
+        /// 父菜单项点击事件处理
+        /// </summary>
+        private void ParentMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sender is Button parentButton && subMenuPanels.ContainsKey(parentButton))
+            {
+                // 激活当前按钮
+                ActivateButton(parentButton);
+                
+                Panel subMenuPanel = subMenuPanels[parentButton];
+                
+                // 隐藏其他子菜单
+                foreach (var panel in subMenuPanels.Values)
+                {
+                    if (panel != subMenuPanel)
+                        panel.Visible = false;
+                }
+                
+                // 切换当前子菜单的可见性
+                subMenuPanel.Visible = !subMenuPanel.Visible;
+                
+                // 更新当前可见子菜单的引用
+                currentSubMenuPanel = subMenuPanel.Visible ? subMenuPanel : null;
+                
+                // 相应的打开主窗体内容
+                string formName = parentButton.Text.Replace(" ", "");
+                if (!subMenuPanel.Visible) // 如果关闭子菜单，打开对应的主表单
+                {
+                    OpenDefaultParentForm(formName);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 打开父菜单对应的默认窗体
+        /// </summary>
+        private void OpenDefaultParentForm(string formName)
+        {
+            switch (formName)
+            {
+                case "质量":
+                    OpenQualityForm();
+                    break;
+                case "生产":
+                    OpenProductionForm();
+                    break;
+                case "计划":
+                    OpenPlanningForm();
+                    break;
+                case "仓储":
+                    OpenInventoryForm();
+                    break;
+                case "设置":
+                    OpenSettingsForm();
+                    break;
+                case "用户":
+                    OpenUserManagementForm();
+                    break;
+                default:
+                    OpenChildForm(formName, null);
+                    break;
+            }
+        }
+        
+        /// <summary>
+        /// 子菜单项点击事件处理
+        /// </summary>
+        private void SubMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sender is Button subButton && subButton.Tag is string menuPath)
+            {
+                // 根据子菜单的Tag打开相应窗体
+                string[] pathParts = menuPath.ToString().Split('.');
+                if (pathParts.Length >= 2)
+                {
+                    string parentMenu = pathParts[0];
+                    string subMenu = pathParts[1];
+                    
+                    // 隐藏所有子菜单
+                    foreach (var panel in subMenuPanels.Values)
+                        panel.Visible = false;
+                    
+                    currentSubMenuPanel = null;
+                    
+                    // 打开相应的窗体
+                    OpenFormByMenuPath(parentMenu, subMenu);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 根据菜单路径打开相应窗体
+        /// </summary>
+        private void OpenFormByMenuPath(string parentMenu, string subMenu)
+        {
+            // 激活父菜单按钮
+            Button parentButton = GetButtonByText(parentMenu);
+            if (parentButton != null)
+                ActivateButton(parentButton);
+            
+            // 根据父菜单和子菜单组合打开相应窗体
+            switch ($"{parentMenu}.{subMenu}")
+            {
+                case "质量.质量检验管理":
+                    OpenQualityInspectionManagement();
+                    break;
+                case "质量.质量标准管理":
+                    OpenQualityStandardManagement();
+                    break;
+                case "质量.不合格品管理":
+                    OpenNonconformingProductManagement();
+                    break;
+                case "质量.质量统计报表":
+                    OpenQualityReports();
+                    break;
+                case "用户.用户管理":
+                    OpenUserManagement();
+                    break;
+                case "用户.角色管理":
+                    OpenRoleManagement();
+                    break;
+                case "用户.权限管理":
+                    OpenPermissionManagement();
+                    break;
+                // 其他菜单项处理...
+                default:
+                    MessageBox.Show($"功能{subMenu}开发中...", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+            }
+        }
+        
+        /// <summary>
+        /// 根据文本获取对应按钮
+        /// </summary>
+        private Button GetButtonByText(string text)
+        {
+            foreach (Control control in pnlMenu.Controls)
+            {
+                if (control is Button button && button.Text.Trim() == text.Trim())
+                    return button;
+            }
+            
+            return null;
+        }
+        
+        // 质量模块相关窗体打开方法
+        private void OpenQualityForm()
+        {
+            Panel qualityPanel = new Panel();
+            qualityPanel.Dock = DockStyle.Fill;
+            qualityPanel.BackColor = Color.White;
+            
+            // 添加标题
+            Label lblTitle = new Label();
+            lblTitle.Text = "质量管理";
+            lblTitle.Font = new Font("Microsoft YaHei UI", 14, FontStyle.Bold);
+            lblTitle.Location = new Point(20, 20);
+            lblTitle.AutoSize = true;
+            qualityPanel.Controls.Add(lblTitle);
+            
+            // 添加质量模块说明
+            Label lblDescription = new Label();
+            lblDescription.Text = "质量管理模块提供对产品质量全生命周期的管理，包括质量检验标准制定、质量检验管理、不合格品处理和质量统计分析等功能。";
+            lblDescription.Font = new Font("Microsoft YaHei UI", 10);
+            lblDescription.Location = new Point(20, 60);
+            lblDescription.Size = new Size(800, 40);
+            qualityPanel.Controls.Add(lblDescription);
+            
+            // 添加功能按钮
+            FlowLayoutPanel flowButtons = new FlowLayoutPanel();
+            flowButtons.Location = new Point(20, 120);
+            flowButtons.Size = new Size(800, 200);
+            flowButtons.FlowDirection = FlowDirection.LeftToRight;
+            flowButtons.WrapContents = true;
+            flowButtons.AutoSize = true;
+            qualityPanel.Controls.Add(flowButtons);
+            
+            // 创建质量模块主要功能按钮
+            CreateQualityButton(flowButtons, "质量检验管理", "对生产过程中的来料检验、过程检验和成品检验进行管理", OpenQualityInspectionManagement);
+            CreateQualityButton(flowButtons, "质量标准管理", "制定和管理产品的质量检验标准和检验项目", OpenQualityStandardManagement);
+            CreateQualityButton(flowButtons, "不合格品管理", "对检验不合格的产品进行处理和跟踪", OpenNonconformingProductManagement);
+            CreateQualityButton(flowButtons, "质量统计报表", "提供质量相关的统计分析和报表功能", OpenQualityReports);
+            
+            // 打开质量模块面板
+            OpenChildForm("Quality", qualityPanel);
+        }
+        
+        private void CreateQualityButton(FlowLayoutPanel container, string text, string description, EventHandler clickHandler)
+        {
+            Panel btnPanel = new Panel();
+            btnPanel.Size = new Size(380, 120);
+            btnPanel.Margin = new Padding(10);
+            btnPanel.BackColor = Color.FromArgb(240, 240, 240);
+            btnPanel.BorderStyle = BorderStyle.FixedSingle;
+            container.Controls.Add(btnPanel);
+            
+            Label lblTitle = new Label();
+            lblTitle.Text = text;
+            lblTitle.Font = new Font("Microsoft YaHei UI", 12, FontStyle.Bold);
+            lblTitle.Location = new Point(10, 10);
+            lblTitle.AutoSize = true;
+            btnPanel.Controls.Add(lblTitle);
+            
+            Label lblDesc = new Label();
+            lblDesc.Text = description;
+            lblDesc.Font = new Font("Microsoft YaHei UI", 9);
+            lblDesc.Location = new Point(10, 40);
+            lblDesc.Size = new Size(360, 40);
+            btnPanel.Controls.Add(lblDesc);
+            
+            Button btnOpen = new Button();
+            btnOpen.Text = "打开";
+            btnOpen.Size = new Size(80, 30);
+            btnOpen.Location = new Point(btnPanel.Width - 90, btnPanel.Height - 40);
+            btnOpen.FlatStyle = FlatStyle.Flat;
+            btnOpen.BackColor = Color.FromArgb(0, 122, 204);
+            btnOpen.ForeColor = Color.White;
+            btnOpen.Click += clickHandler;
+            btnPanel.Controls.Add(btnOpen);
+        }
+        
+        private void OpenQualityInspectionManagement()
+        {
+            try
+            {
+                var inspectionForm = Program.ServiceProvider.GetRequiredService<QualityInspectionManagementForm>();
+                inspectionForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "打开质量检验管理窗体时出错");
+                MessageBox.Show($"打开质量检验管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        private void OpenQualityStandardManagement()
+        {
+            try
+            {
+                var standardForm = Program.ServiceProvider.GetRequiredService<QualityStandardManagementForm>();
+                standardForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "打开质量标准管理窗体时出错");
+                MessageBox.Show($"打开质量标准管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        private void OpenNonconformingProductManagement()
+        {
+            try
+            {
+                var nonconformingForm = Program.ServiceProvider.GetRequiredService<NonconformingProductForm>();
+                nonconformingForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "打开不合格品管理窗体时出错");
+                MessageBox.Show($"打开不合格品管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        private void OpenQualityReports()
+        {
+            MessageBox.Show("质量统计报表功能开发中，敬请期待！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        
+        // 用户管理相关窗体打开方法
+        private void OpenUserManagementForm()
+        {
+            OpenChildForm("UserManagement", null);
+        }
+        
+        private void OpenUserManagement()
+        {
+            try
+            {
+                var userForm = Program.ServiceProvider.GetRequiredService<UserManagementForm>();
+                OpenChildForm("UserManagement", userForm);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "打开用户管理窗体时出错");
+                MessageBox.Show($"打开用户管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        private void OpenRoleManagement()
+        {
+            try
+            {
+                var roleForm = Program.ServiceProvider.GetRequiredService<RoleManagementForm>();
+                OpenChildForm("RoleManagement", roleForm);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "打开角色管理窗体时出错");
+                MessageBox.Show($"打开角色管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        private void OpenPermissionManagement()
+        {
+            try
+            {
+                var permissionForm = Program.ServiceProvider.GetRequiredService<PermissionManagementForm>();
+                OpenChildForm("PermissionManagement", permissionForm);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "打开权限管理窗体时出错");
+                MessageBox.Show($"打开权限管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        // 生产管理相关
+        private void OpenProductionForm()
+        {
+            MessageBox.Show("生产管理模块主界面开发中...", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        
+        // 计划管理相关
+        private void OpenPlanningForm()
+        {
+            MessageBox.Show("计划管理模块主界面开发中...", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        
+        // 库存管理相关
+        private void OpenInventoryForm()
+        {
+            MessageBox.Show("库存管理模块主界面开发中...", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        
+        // 设置模块相关
+        private void OpenSettingsForm()
+        {
+            // 打开设置窗体并显示主题设置
+            Form settingsForm = CreateOrGetSettingsForm();
+            OpenChildForm("Settings", settingsForm);
         }
         
         /// <summary>
@@ -392,7 +903,116 @@ namespace GC_MES.WinForm.Forms
         private void btnQuality_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenChildForm("Quality", null);
+            
+            // 创建质量模块的面板
+            Panel qualityPanel = new Panel();
+            qualityPanel.Dock = DockStyle.Fill;
+            qualityPanel.BackColor = Color.White;
+            
+            // 添加标题
+            Label lblTitle = new Label();
+            lblTitle.Text = "质量管理";
+            lblTitle.Font = new Font("Microsoft YaHei UI", 14, FontStyle.Bold);
+            lblTitle.Location = new Point(20, 20);
+            lblTitle.AutoSize = true;
+            qualityPanel.Controls.Add(lblTitle);
+            
+            // 添加功能按钮
+            FlowLayoutPanel flowButtons = new FlowLayoutPanel();
+            flowButtons.Location = new Point(20, 60);
+            flowButtons.Size = new Size(800, 120);
+            flowButtons.FlowDirection = FlowDirection.LeftToRight;
+            flowButtons.WrapContents = true;
+            flowButtons.AutoSize = true;
+            qualityPanel.Controls.Add(flowButtons);
+            
+            // 质量检验管理按钮
+            Button btnInspection = new Button();
+            btnInspection.Text = "质量检验管理";
+            btnInspection.Size = new Size(180, 40);
+            btnInspection.FlatStyle = FlatStyle.Flat;
+            btnInspection.BackColor = Color.FromArgb(0, 122, 204);
+            btnInspection.ForeColor = Color.White;
+            btnInspection.Font = new Font("Microsoft YaHei UI", 10);
+            btnInspection.Click += (s, args) => {
+                try
+                {
+                    var serviceProvider = Program.ServiceProvider;
+                    var inspectionForm = serviceProvider.GetRequiredService<QualityInspectionManagementForm>();
+                    inspectionForm.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "打开质量检验管理窗体时出错");
+                    MessageBox.Show($"打开质量检验管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+            flowButtons.Controls.Add(btnInspection);
+            
+            // 质量标准管理按钮
+            Button btnStandard = new Button();
+            btnStandard.Text = "质量标准管理";
+            btnStandard.Size = new Size(180, 40);
+            btnStandard.FlatStyle = FlatStyle.Flat;
+            btnStandard.BackColor = Color.FromArgb(0, 122, 204);
+            btnStandard.ForeColor = Color.White;
+            btnStandard.Font = new Font("Microsoft YaHei UI", 10);
+            btnStandard.Click += (s, args) => {
+                try
+                {
+                    var serviceProvider = Program.ServiceProvider;
+                    var standardForm = serviceProvider.GetRequiredService<QualityStandardManagementForm>();
+                    standardForm.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "打开质量标准管理窗体时出错");
+                    MessageBox.Show($"打开质量标准管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+            flowButtons.Controls.Add(btnStandard);
+            
+            // 不合格品管理按钮
+            Button btnNonconforming = new Button();
+            btnNonconforming.Text = "不合格品管理";
+            btnNonconforming.Size = new Size(180, 40);
+            btnNonconforming.FlatStyle = FlatStyle.Flat;
+            btnNonconforming.BackColor = Color.FromArgb(0, 122, 204);
+            btnNonconforming.ForeColor = Color.White;
+            btnNonconforming.Font = new Font("Microsoft YaHei UI", 10);
+            btnNonconforming.Click += (s, args) => {
+                try
+                {
+                    var serviceProvider = Program.ServiceProvider;
+                    var nonconformingForm = serviceProvider.GetRequiredService<NonconformingProductForm>();
+                    nonconformingForm.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "打开不合格品管理窗体时出错");
+                    MessageBox.Show($"打开不合格品管理窗体时出错: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+            flowButtons.Controls.Add(btnNonconforming);
+            
+            // 质量报表按钮
+            Button btnQualityReport = new Button();
+            btnQualityReport.Text = "质量统计报表";
+            btnQualityReport.Size = new Size(180, 40);
+            btnQualityReport.FlatStyle = FlatStyle.Flat;
+            btnQualityReport.BackColor = Color.FromArgb(0, 122, 204);
+            btnQualityReport.ForeColor = Color.White;
+            btnQualityReport.Font = new Font("Microsoft YaHei UI", 10);
+            btnQualityReport.Click += (s, args) => {
+                MessageBox.Show("质量统计报表功能开发中，敬请期待！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            };
+            flowButtons.Controls.Add(btnQualityReport);
+            
+            // 应用主题
+            ThemeManager.ApplyTheme(qualityPanel);
+            
+            // 打开质量模块面板
+            OpenChildForm("Quality", qualityPanel);
         }
         
         private void btnMaintenance_Click(object sender, EventArgs e)

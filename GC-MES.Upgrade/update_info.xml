@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UpdateInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>1.1.0.0</Version>
+  <DownloadUrl>http://update.gc-mes.com/updates/GC-MES-1.1.0.0.zip</DownloadUrl>
+  <FileName>GC-MES-1.1.0.0.zip</FileName>
+  <ReleaseNotes>
+1. 修复了部分界面布局问题
+2. 优化了数据加载性能
+3. 新增了质量检验功能
+4. 完善了库存管理模块
+  </ReleaseNotes>
+  <IsForceUpdate>false</IsForceUpdate>
+  <ReleaseDate>2023-11-10T10:30:00</ReleaseDate>
+</UpdateInfo> 

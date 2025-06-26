@@ -51,10 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BOM.cs" />
     <Compile Include="Permission.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductRouting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="RolePermission.cs" />
+    <Compile Include="RoutingOperation.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserRole.cs" />
   </ItemGroup>

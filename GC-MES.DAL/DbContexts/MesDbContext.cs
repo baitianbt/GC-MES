@@ -27,6 +27,13 @@ namespace GC_MES.DAL.DbContexts
         public DbSet<BOM> BOMs { get; set; }
         public DbSet<ProductRouting> ProductRoutings { get; set; }
         public DbSet<RoutingOperation> RoutingOperations { get; set; }
+        
+        // 质量管理相关
+        public DbSet<QualityStandard> QualityStandards { get; set; }
+        public DbSet<QualityStandardItem> QualityStandardItems { get; set; }
+        public DbSet<QualityInspection> QualityInspections { get; set; }
+        public DbSet<QualityInspectionItem> QualityInspectionItems { get; set; }
+        public DbSet<NonconformingProduct> NonconformingProducts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -83,6 +90,46 @@ namespace GC_MES.DAL.DbContexts
                 .HasRequired(o => o.Routing)
                 .WithMany(r => r.Operations)
                 .HasForeignKey(o => o.RoutingId);
+                
+            // 配置质量标准和标准项目的关系
+            modelBuilder.Entity<QualityStandardItem>()
+                .HasRequired(i => i.Standard)
+                .WithMany(s => s.StandardItems)
+                .HasForeignKey(i => i.StandardId);
+                
+            // 配置质量检验和检验项目的关系
+            modelBuilder.Entity<QualityInspectionItem>()
+                .HasRequired(i => i.Inspection)
+                .WithMany(s => s.InspectionItems)
+                .HasForeignKey(i => i.InspectionId);
+                
+            // 配置质量检验和产品的关系
+            modelBuilder.Entity<QualityInspection>()
+                .HasRequired(q => q.Product)
+                .WithMany()
+                .HasForeignKey(q => q.ProductId)
+                .WillCascadeOnDelete(false);
+                
+            // 配置质量检验和工序的关系（可选）
+            modelBuilder.Entity<QualityInspection>()
+                .HasOptional(q => q.Operation)
+                .WithMany()
+                .HasForeignKey(q => q.OperationId)
+                .WillCascadeOnDelete(false);
+                
+            // 配置不合格品和检验的关系（可选）
+            modelBuilder.Entity<NonconformingProduct>()
+                .HasOptional(n => n.Inspection)
+                .WithMany()
+                .HasForeignKey(n => n.InspectionId)
+                .WillCascadeOnDelete(false);
+                
+            // 配置不合格品和产品的关系
+            modelBuilder.Entity<NonconformingProduct>()
+                .HasRequired(n => n.Product)
+                .WithMany()
+                .HasForeignKey(n => n.ProductId)
+                .WillCascadeOnDelete(false);
         }
     }
 }
