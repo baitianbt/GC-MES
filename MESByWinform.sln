@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.Model", "GC-MES.Mode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.Common", "GC-MES.Common\GC-MES.Common.csproj", "{1BA7C452-0134-418A-90B1-A9A83BC93B10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC-MES.Core", "GC-MES.Core\GC-MES.Core.csproj", "{94136B12-B8F0-4543-80F0-340C1D781C9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{1BA7C452-0134-418A-90B1-A9A83BC93B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BA7C452-0134-418A-90B1-A9A83BC93B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BA7C452-0134-418A-90B1-A9A83BC93B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94136B12-B8F0-4543-80F0-340C1D781C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94136B12-B8F0-4543-80F0-340C1D781C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94136B12-B8F0-4543-80F0-340C1D781C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94136B12-B8F0-4543-80F0-340C1D781C9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

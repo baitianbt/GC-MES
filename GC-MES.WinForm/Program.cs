@@ -5,9 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GC_MES.WinForm
@@ -23,6 +20,10 @@ namespace GC_MES.WinForm
         [STAThread]
         static void Main()
         {
+            // .NET 8 Windows Forms应用初始化
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            
             // 1. 构建配置
             var config = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -71,26 +72,22 @@ namespace GC_MES.WinForm
             services.AddScoped<BOMEditForm>();
             services.AddScoped<RoutingManagementForm>();
             services.AddScoped<RoutingEditForm>();
-            services.AddScoped<OperationManagementForm>();
             
             // 质量模块相关窗体
+            // 在完成迁移后添加这些窗体
+            /* 
             services.AddScoped<QualityInspectionManagementForm>();
             services.AddScoped<QualityInspectionEditForm>();
             services.AddScoped<QualityInspectionItemEditForm>();
-            services.AddScoped<QualityInspectionDetailForm>();
             services.AddScoped<NonconformingProductForm>();
-            services.AddScoped<QualityStandardManagementForm>();
-            services.AddScoped<QualityStandardEditForm>();
-            services.AddScoped<QualityStandardItemEditForm>();
+            services.AddScoped<QualityStandardManagementForm>(); 
+            */
             
             // 也可以自动注册所有窗体
             // services.AutoRegisterForms("GC_MES.WinForm");
 
             // 构建服务提供者
             ServiceProvider = services.BuildServiceProvider();
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
 
             // 从登录窗体启动应用
             var loginForm = ServiceProvider.GetRequiredService<LoginForm>();

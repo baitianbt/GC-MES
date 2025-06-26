@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>GC_MES.Common</RootNamespace>
-    <AssemblyName>GC-MES.Common</AssemblyName>
+    <RootNamespace>GC_MES.Core</RootNamespace>
+    <AssemblyName>GC-MES.Core</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

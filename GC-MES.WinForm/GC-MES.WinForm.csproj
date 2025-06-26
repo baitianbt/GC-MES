@@ -1,344 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7A64248C-8875-461B-8190-6CB90C2C7CE9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>GC_MES.WinForm</RootNamespace>
     <AssemblyName>GC-MES.WinForm</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.6\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.9.0.6\lib\net462\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.9.0.6\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.9.0.6\lib\net462\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.FileExtensions.9.0.6\lib\net462\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Json, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Json.9.0.6\lib\net462\Microsoft.Extensions.Configuration.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.9.0.6\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.6\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.9.0.6\lib\net462\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Physical.9.0.6\lib\net462\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.9.0.6\lib\net462\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.9.0.6\lib\net462\Microsoft.Extensions.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.9.0.6\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Configuration, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Configuration.9.0.6\lib\net462\Microsoft.Extensions.Logging.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Console, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Console.9.0.6\lib\net462\Microsoft.Extensions.Logging.Console.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.9.0.6\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.ConfigurationExtensions.9.0.6\lib\net462\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.9.0.6\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.9.0.6\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Pipelines, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Pipelines.9.0.6\lib\net462\System.IO.Pipelines.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.9.0.6\lib\net462\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.9.0.6\lib\net462\System.Text.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms.DataVisualization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Extensions\ServiceCollectionExtensions.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\BOMEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BOMEditForm.Designer.cs">
-      <DependentUpon>BOMEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\BOMManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BOMManagementForm.Designer.cs">
-      <DependentUpon>BOMManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\DashboardForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\DashboardForm.Designer.cs">
-      <DependentUpon>DashboardForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PermissionManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PermissionManagementForm.Designer.cs">
-      <DependentUpon>PermissionManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ProductEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProductEditForm.Designer.cs">
-      <DependentUpon>ProductEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ProductManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProductManagementForm.Designer.cs">
-      <DependentUpon>ProductManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RoleEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RoleEditForm.Designer.cs">
-      <DependentUpon>RoleEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RoleManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RoleManagementForm.Designer.cs">
-      <DependentUpon>RoleManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RolePermissionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RolePermissionForm.Designer.cs">
-      <DependentUpon>RolePermissionForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RoutingEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RoutingEditForm.Designer.cs">
-      <DependentUpon>RoutingEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RoutingManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RoutingManagementForm.Designer.cs">
-      <DependentUpon>RoutingManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ThemeManager.cs" />
-    <Compile Include="Forms\UserEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UserEditForm.Designer.cs">
-      <DependentUpon>UserEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UserManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UserManagementForm.Designer.cs">
-      <DependentUpon>UserManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\WorkOrderManagementForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\WorkOrderManagementForm.Designer.cs">
-      <DependentUpon>WorkOrderManagementForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\BOMEditForm.resx">
-      <DependentUpon>BOMEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BOMManagementForm.resx">
-      <DependentUpon>BOMManagementForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DashboardForm.resx">
-      <DependentUpon>DashboardForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProductManagementForm.resx">
-      <DependentUpon>ProductManagementForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RoleEditForm.resx">
-      <DependentUpon>RoleEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RolePermissionForm.resx">
-      <DependentUpon>RolePermissionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RoutingManagementForm.resx">
-      <DependentUpon>RoutingManagementForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserEditForm.resx">
-      <DependentUpon>UserEditForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WorkOrderManagementForm.resx">
-      <DependentUpon>WorkOrderManagementForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Content Include="appsettings.json">
+    <ProjectReference Include="..\GC-MES.BLL\GC-MES.BLL.csproj" />
+    <ProjectReference Include="..\GC-MES.Common\GC-MES.Common.csproj" />
+    <ProjectReference Include="..\GC-MES.Core\GC-MES.Core.csproj" />
+    <ProjectReference Include="..\GC-MES.DAL\GC-MES.DAL.csproj" />
+    <ProjectReference Include="..\GC-MES.Model\GC-MES.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config\" />
-    <Folder Include="Controls\" />
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GC-MES.BLL\GC-MES.BLL.csproj">
-      <Project>{d8c9407c-82e8-46a9-9d4f-be0e4ad7d53d}</Project>
-      <Name>GC-MES.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GC-MES.Common\GC-MES.Common.csproj">
-      <Project>{1ba7c452-0134-418a-90b1-a9a83bc93b10}</Project>
-      <Name>GC-MES.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GC-MES.DAL\GC-MES.DAL.csproj">
-      <Project>{b2ce0491-82ad-49fe-8964-1344746150d0}</Project>
-      <Name>GC-MES.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GC-MES.Model\GC-MES.Model.csproj">
-      <Project>{51421045-521f-4e15-8389-4904a5630e9b}</Project>
-      <Name>GC-MES.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GC-MES.Upgrade\GC-MES.Upgrade.csproj">
-      <Project>{e86baf9f-eac0-49d0-9964-c84ac94722b6}</Project>
-      <Name>GC-MES.Upgrade</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
-  </Target>
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+
 </Project>
