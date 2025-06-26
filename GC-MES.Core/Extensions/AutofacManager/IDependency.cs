@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GC_MES.DAL
+namespace GC_MES.Core.Extensions.AutofacManager
 {
     public interface IDependency
     {

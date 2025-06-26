@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 
 
-namespace iMES.System.IRepositories
+namespace GC_MES.System.IRepositories
 {
     public partial interface ISys_DictionaryRepository : IDependency,IRepository<Sys_Dictionary>
     {

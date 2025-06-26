@@ -3,6 +3,7 @@
  *如果数据库字段发生变化，请在代码生器重新生成此Model
  */
 using GC_MES.Model.AtrributeManager;
+using GC_MES.Model.SystemModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

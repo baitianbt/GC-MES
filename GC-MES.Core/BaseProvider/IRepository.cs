@@ -1,14 +1,19 @@
-﻿using GC_MES.DAL.DbContexts;
+﻿
+using GC_MES.Core.Dapper;
+using GC_MES.Core.EFDbContext;
+using GC_MES.Core.Enums;
 using GC_MES.Model.SystemModels;
+using GC_MES.Core.Utilities;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace GC_MES.DAL
+
+namespace GC_MES.Core.BaseProvider
 {
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {
@@ -26,7 +31,7 @@ namespace GC_MES.DAL
         /// <returns></returns>
         WebResponseContent DbContextBeginTransaction(Func<WebResponseContent> action);
 
-
+    
         /// <summary>
         /// 通过条件查询数据
         /// </summary>
@@ -230,7 +235,7 @@ namespace GC_MES.DAL
             Expression<Func<Detail, object>> updateDetailFields = null,
             bool saveChange = false) where Detail : class;
 
-        void Delete(TEntity model, bool saveChanges = false);
+        void Delete(TEntity model, bool saveChanges=false);
 
         /// <summary>
         /// 
@@ -250,7 +255,7 @@ namespace GC_MES.DAL
            where T : class;
 
 
-        void BulkInsert(IEnumerable<TEntity> entities, bool setOutputIdentity = false);
+       void BulkInsert(IEnumerable<TEntity> entities, bool setOutputIdentity = false);
 
         int SaveChanges();
 
@@ -281,5 +286,4 @@ namespace GC_MES.DAL
         void Detached(TEntity entity);
         void DetachedRange(IEnumerable<TEntity> entities);
     }
-   
 }
