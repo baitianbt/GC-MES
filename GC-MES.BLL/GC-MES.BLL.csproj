@@ -1,11 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>GC_MES.BLL</RootNamespace>
-    <AssemblyName>GC-MES.BLL</AssemblyName>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<RootNamespace>GC_MES.BLL</RootNamespace>
+		<AssemblyName>GC-MES.BLL</AssemblyName>
+
+		<!-- 以下是等价于 AssemblyInfo.cs 中的内容 -->
+		<AssemblyTitle>GC-MES.BLL</AssemblyTitle>
+		<Company>Your Company</Company>
+		<Product>GC-MES.BLL</Product>
+		<Authors>Your Name</Authors>
+		<Description>业务层</Description>
+		<Copyright>Copyright © 2025</Copyright>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<!-- 默认 true，除非你自己生成 -->
+	</PropertyGroup>
+
+
+	<ItemGroup>
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.196" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GC-MES.DAL\GC-MES.DAL.csproj" />
+    <ProjectReference Include="..\GC-MES.Model\GC-MES.Model.csproj" />
+  </ItemGroup>
 
 </Project>

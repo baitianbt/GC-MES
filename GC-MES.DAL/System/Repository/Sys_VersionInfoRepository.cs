@@ -1,24 +1,17 @@
-/*
- *代码由框架生成,任何更改都可能导致被代码生成器覆盖
- *Repository提供数据库操作，如果要增加数据库操作请在当前目录下Partial文件夹Sys_VersionInfoRepository编写代码
- */
-using iMES.System.IRepositories;
-using iMES.Core.BaseProvider;
-using iMES.Core.EFDbContext;
-using iMES.Core.Extensions.AutofacManager;
-using iMES.Entity.DomainModels;
+using GC_MES.DAL.System.IRepository;
+using SqlSugar;
 
-namespace iMES.System.Repositories
+namespace GC_MES.DAL.System.Repository
 {
-    public partial class Sys_VersionInfoRepository : RepositoryBase<Sys_VersionInfo> , ISys_VersionInfoRepository
-    {
-    public Sys_VersionInfoRepository(SysDbContext dbContext)
-    : base(dbContext)
+
+
+    public partial class Sys_VersionInfoRepository : BaseRepository<Sys_VersionInfo>, ISys_VersionInfoRepository
     {
 
-    }
-    public static ISys_VersionInfoRepository Instance
-    {
-      get {  return AutofacContainerModule.GetService<ISys_VersionInfoRepository>(); } }
+        public Sys_VersionInfoRepository(ISqlSugarClient sqlSugar) : base(sqlSugar)
+        {
+        }
+
     }
 }
+

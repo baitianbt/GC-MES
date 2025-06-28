@@ -1,20 +1,11 @@
 ﻿using Newtonsoft.Json;
-/*
- *Author：COCO
- * 此代码由框架生成，请勿随意更改
- */
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using GC_MES.Model.SystemModels;
-using GC_MES.Model.AtrributeManager;
+
 
 namespace GC_MES.Model.System
 {
     [Table("Sys_Role")]
-    [EntityAttribute(TableCnName = "角色管理")]
-    public class Sys_Role : SysEntity
+
+    public class Sys_Role 
     {
         /// <summary>
         ///Id

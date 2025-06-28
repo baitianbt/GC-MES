@@ -1,22 +1,17 @@
-﻿using iMES.System.IRepositories;
-using iMES.Core.BaseProvider;
-using iMES.Core.Extensions.AutofacManager;
-using iMES.Core.EFDbContext;
-using iMES.Entity.DomainModels;
+﻿using GC_MES.DAL.System.IRepository;
+using SqlSugar;
 
-namespace iMES.System.Repositories
+namespace GC_MES.DAL.System.Repositories
 {
-    public partial class Sys_MenuRepository : RepositoryBase<Sys_Menu>, ISys_MenuRepository
-    {
-        public Sys_MenuRepository(SysDbContext dbContext)
-        : base(dbContext)
-        {
+   
 
-        }
-        public static ISys_MenuRepository Instance
+    public partial class Sys_MenuRepository : BaseRepository<Sys_Menu>, ISys_MenuRepository
+    {
+
+        public Sys_MenuRepository(ISqlSugarClient sqlSugar) : base(sqlSugar)
         {
-            get { return AutofacContainerModule.GetService<ISys_MenuRepository>(); }
         }
+
     }
 }
 

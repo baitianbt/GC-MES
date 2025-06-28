@@ -8,9 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using GC_MES.DAL.DbContexts;
 using GC_MES.Model;
-using System.Data.Entity;
 
 namespace GC_MES.WinForm.Forms
 {

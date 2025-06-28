@@ -1,23 +1,10 @@
-﻿/*
- *Author：COCO
- * 此代码由框架生成，请勿随意更改
- */
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GC_MES.Model;
-using GC_MES.Model.AtrributeManager;
-using GC_MES.Model.SystemModels;
+﻿
 
 namespace GC_MES.Model.System
 {
     [Table("Sys_Log")]
-    [EntityAttribute(TableCnName = "系统日志")]
-    public class Sys_Log:SysEntity
+ 
+    public class Sys_Log
     {
         /// <summary>
        ///

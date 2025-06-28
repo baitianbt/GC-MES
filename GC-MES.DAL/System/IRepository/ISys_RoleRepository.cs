@@ -1,17 +1,14 @@
-
+using GC_MES.Model.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GC_MES.Core.BaseProvider;
-using GC_MES.Core.Extensions.AutofacManager;
-using GC_MES.Model.System;
 
 
-namespace GC_MES.System.IRepositories
+namespace GC_MES.DAL.System.IRepository
 {
-    public partial interface ISys_RoleRepository : IDependency,IRepository<Sys_Role>
+    public  interface ISys_RoleRepository : IBaseRepository<Sys_Role>
     {
     }
 }

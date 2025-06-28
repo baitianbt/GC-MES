@@ -10,13 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GC_MES.Model;
-using GC_MES.Model.AtrributeManager;
-using GC_MES.Model.SystemModels;
+
 
 namespace GC_MES.Model.System
 {
-    [EntityAttribute(TableCnName = "字典视图")]
-    public class vSys_Dictionary:SysEntity
+  
+    public class vSys_Dictionary
     {
         /// <summary>
        ///

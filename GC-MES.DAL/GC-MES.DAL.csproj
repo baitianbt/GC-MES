@@ -1,16 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<RootNamespace>GC_MES.DAL</RootNamespace>
+		<AssemblyName>GC-MES.DAL</AssemblyName>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-  <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <RootNamespace>GC_MES.DAL</RootNamespace>
-    <AssemblyName>GC-MES.DAL</AssemblyName>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+		<!-- 这些等价于 AssemblyInfo.cs -->
+		<AssemblyTitle>GC-MES.DAL</AssemblyTitle>
+		<Company>你的公司</Company>
+		<Product>GC-MES</Product>
+		<Description>数据访问层</Description>
+		<Copyright>Copyright © 2025</Copyright>
+		<Version>1.0.0.0</Version>
+		<FileVersion>1.0.0.0</FileVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GC-MES.Core\GC-MES.Core.csproj" />
-    <ProjectReference Include="..\GC-MES.Model\GC-MES.Model.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="SqlSugarCore" Version="5.1.4.196" />
+	</ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\GC-MES.Core\GC-MES.Core.csproj" />
+		<ProjectReference Include="..\GC-MES.Model\GC-MES.Model.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
 </Project>

@@ -1,22 +1,11 @@
-/*
- *Author：COCO
- * 此代码由框架生成，请勿随意更改
- */
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GC_MES.Model.AtrributeManager;
-using GC_MES.Model.SystemModels;
+
+using SqlSugar;
 
 namespace GC_MES.Model.System
 {
     [Table("Sys_Menu")]
-    [EntityAttribute(TableCnName = "菜单配置")]
-    public class Sys_Menu:SysEntity
+  
+    public class Sys_Menu
     {
         /// <summary>
        ///ID
@@ -160,7 +149,7 @@ namespace GC_MES.Model.System
         public int? MenuType { get; set; }
 
 
-
+        [SugarColumn(IsIgnore = true)]
         public List<Sys_Actions> Actions { get; set; }
     }
 }

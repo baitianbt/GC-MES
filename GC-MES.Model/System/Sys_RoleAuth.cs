@@ -1,16 +1,8 @@
-﻿using GC_MES.Model.SystemModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace GC_MES.Model.System
 {
     [Table("Sys_RoleAuth")]
-    public class Sys_RoleAuth: SysEntity
+    public class Sys_RoleAuth
     {
         /// <summary>
        ///

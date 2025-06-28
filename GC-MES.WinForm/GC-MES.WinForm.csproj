@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -9,6 +9,71 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Forms\BOMEditForm.cs" />
+    <Compile Remove="Forms\BOMEditForm.Designer.cs" />
+    <Compile Remove="Forms\BOMManagementForm.cs" />
+    <Compile Remove="Forms\BOMManagementForm.Designer.cs" />
+    <Compile Remove="Forms\DashboardForm.cs" />
+    <Compile Remove="Forms\DashboardForm.Designer.cs" />
+    <Compile Remove="Forms\InboundOrderManagementForm.cs" />
+    <Compile Remove="Forms\InboundOrderManagementForm.Designer.cs" />
+    <Compile Remove="Forms\InventoryBalanceForm.cs" />
+    <Compile Remove="Forms\InventoryBalanceForm.Designer.cs" />
+    <Compile Remove="Forms\InventoryTransactionForm.cs" />
+    <Compile Remove="Forms\InventoryTransactionForm.Designer.cs" />
+    <Compile Remove="Forms\OutboundOrderManagementForm.cs" />
+    <Compile Remove="Forms\OutboundOrderManagementForm.Designer.cs" />
+    <Compile Remove="Forms\PermissionManagementForm.cs" />
+    <Compile Remove="Forms\PermissionManagementForm.Designer.cs" />
+    <Compile Remove="Forms\ProductEditForm.cs" />
+    <Compile Remove="Forms\ProductEditForm.Designer.cs" />
+    <Compile Remove="Forms\ProductManagementForm.cs" />
+    <Compile Remove="Forms\ProductManagementForm.Designer.cs" />
+    <Compile Remove="Forms\QualityInspectionEditForm.cs" />
+    <Compile Remove="Forms\QualityInspectionEditForm.Designer.cs" />
+    <Compile Remove="Forms\QualityInspectionItemEditForm.cs" />
+    <Compile Remove="Forms\QualityInspectionItemEditForm.Designer.cs" />
+    <Compile Remove="Forms\QualityInspectionManagementForm.cs" />
+    <Compile Remove="Forms\QualityInspectionManagementForm.Designer.cs" />
+    <Compile Remove="Forms\QualityStandardManagementForm.cs" />
+    <Compile Remove="Forms\QualityStandardManagementForm.Designer.cs" />
+    <Compile Remove="Forms\RoleEditForm.cs" />
+    <Compile Remove="Forms\RoleEditForm.Designer.cs" />
+    <Compile Remove="Forms\RoleManagementForm.cs" />
+    <Compile Remove="Forms\RoleManagementForm.Designer.cs" />
+    <Compile Remove="Forms\RolePermissionForm.cs" />
+    <Compile Remove="Forms\RolePermissionForm.Designer.cs" />
+    <Compile Remove="Forms\RoutingEditForm.cs" />
+    <Compile Remove="Forms\RoutingEditForm.Designer.cs" />
+    <Compile Remove="Forms\RoutingManagementForm.cs" />
+    <Compile Remove="Forms\RoutingManagementForm.Designer.cs" />
+    <Compile Remove="Forms\ThemeManager.cs" />
+    <Compile Remove="Forms\UserEditForm.cs" />
+    <Compile Remove="Forms\UserEditForm.Designer.cs" />
+    <Compile Remove="Forms\UserManagementForm.cs" />
+    <Compile Remove="Forms\UserManagementForm.Designer.cs" />
+    <Compile Remove="Forms\WorkOrderManagementForm.cs" />
+    <Compile Remove="Forms\WorkOrderManagementForm.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Forms\BOMEditForm.resx" />
+    <EmbeddedResource Remove="Forms\BOMManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\DashboardForm.resx" />
+    <EmbeddedResource Remove="Forms\ProductManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\QualityInspectionItemEditForm.resx" />
+    <EmbeddedResource Remove="Forms\RoleEditForm.resx" />
+    <EmbeddedResource Remove="Forms\RolePermissionForm.resx" />
+    <EmbeddedResource Remove="Forms\RoutingManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\UserEditForm.resx" />
+    <EmbeddedResource Remove="Forms\WorkOrderManagementForm.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\i_bg1.jpg" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.6" />
@@ -23,20 +88,27 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.196" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GC-MES.BLL\GC-MES.BLL.csproj" />
-    <ProjectReference Include="..\GC-MES.Common\GC-MES.Common.csproj" />
-    <ProjectReference Include="..\GC-MES.Core\GC-MES.Core.csproj" />
     <ProjectReference Include="..\GC-MES.DAL\GC-MES.DAL.csproj" />
     <ProjectReference Include="..\GC-MES.Model\GC-MES.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\i_bg1.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Forms\" />
   </ItemGroup>
 
 </Project>

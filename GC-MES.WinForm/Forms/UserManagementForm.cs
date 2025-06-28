@@ -355,54 +355,54 @@ namespace GC_MES.WinForm.Forms
             }
         }
 
-        private void btnDeleteUser_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewUsers.SelectedRows.Count > 0)
-            {
-                DataRowView selectedRow = dataGridViewUsers.SelectedRows[0].DataBoundItem as DataRowView;
-                if (selectedRow != null)
-                {
-                    string userId = selectedRow["用户ID"].ToString();
-                    string username = selectedRow["用户名"].ToString();
+        //private void btnDeleteUser_Click(object sender, EventArgs e)
+        //{
+        //    if (dataGridViewUsers.SelectedRows.Count > 0)
+        //    {
+        //        DataRowView selectedRow = dataGridViewUsers.SelectedRows[0].DataBoundItem as DataRowView;
+        //        if (selectedRow != null)
+        //        {
+        //            string userId = selectedRow["用户ID"].ToString();
+        //            string username = selectedRow["用户名"].ToString();
                     
-                    if (userId == "001" && username == "admin")
-                    {
-                        MessageBox.Show("系统管理员账户不能删除", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
+        //            if (userId == "001" && username == "admin")
+        //            {
+        //                MessageBox.Show("系统管理员账户不能删除", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //                return;
+        //            }
                     
-                    if (MessageBox.Show($"确定要删除用户"{username}"吗？\n删除后将无法恢复！", 
-                        "确认删除", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        // 在全局数据和当前视图中删除
-                        DataRow rowToDelete = null;
-                        foreach (DataRow row in _usersDataTable.Rows)
-                        {
-                            if (row["用户ID"].ToString() == userId)
-                            {
-                                rowToDelete = row;
-                                break;
-                            }
-                        }
+        //            if (MessageBox.Show($"确定要删除用户"{username}"吗？\n删除后将无法恢复！", 
+        //                "确认删除", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+        //            {
+        //                // 在全局数据和当前视图中删除
+        //                DataRow rowToDelete = null;
+        //                foreach (DataRow row in _usersDataTable.Rows)
+        //                {
+        //                    if (row["用户ID"].ToString() == userId)
+        //                    {
+        //                        rowToDelete = row;
+        //                        break;
+        //                    }
+        //                }
                         
-                        if (rowToDelete != null)
-                        {
-                            _allUsers.Remove(rowToDelete);
-                            rowToDelete.Delete();
-                        }
+        //                if (rowToDelete != null)
+        //                {
+        //                    _allUsers.Remove(rowToDelete);
+        //                    rowToDelete.Delete();
+        //                }
                         
-                        // 刷新显示
-                        UpdatePageDisplay();
+        //                // 刷新显示
+        //                UpdatePageDisplay();
                         
-                        _logger.LogInformation($"已删除用户: {userId} - {username}");
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("请先选择要删除的用户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+        //                _logger.LogInformation($"已删除用户: {userId} - {username}");
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("请先选择要删除的用户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //}
 
         private void btnFirstPage_Click(object sender, EventArgs e)
         {

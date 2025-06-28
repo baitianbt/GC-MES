@@ -266,8 +266,7 @@ namespace GC_MES.WinForm.Forms
             this.btnDeleteUser.TabIndex = 3;
             this.btnDeleteUser.Text = "删除用户";
             this.btnDeleteUser.UseVisualStyleBackColor = true;
-            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
-            // 
+           // 
             // btnEditUser
             // 
             this.btnEditUser.Location = new System.Drawing.Point(98, 11);

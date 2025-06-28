@@ -9,15 +9,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GC_MES.Model.AtrributeManager;
-using GC_MES.Model.SystemModels;
+
 
 
 namespace GC_MES.Model.System
 {
     [Table("Sys_Dictionary")]
-    [Entity(TableCnName = "字典数据",DetailTable =  new Type[] { typeof(Sys_DictionaryList)},DetailTableCnName = "字典明细")]
-    public class Sys_Dictionary:SysEntity
+    public class Sys_Dictionary
     {
         /// <summary>
        ///字典ID

@@ -1,25 +1,16 @@
-﻿/*
- *Author：COCO
- * 此代码由框架生成，请勿随意更改
- */
-using iMES.System.IRepositories;
-using iMES.Core.BaseProvider;
-using iMES.Core.EFDbContext;
-using iMES.Core.Extensions.AutofacManager;
-using iMES.Entity.DomainModels;
+﻿
+using GC_MES.DAL;
+using GC_MES.DAL.System.IRepository;
+using SqlSugar;
 
-namespace iMES.System.Repositories
+
+namespace GC_MES.DAL.System.Repository
 {
-    public partial class Sys_DictionaryRepository : RepositoryBase<Sys_Dictionary>, ISys_DictionaryRepository
+    public partial class Sys_DictionaryRepository : BaseRepository<Sys_Dictionary>, ISys_DictionaryRepository
     {
-        public Sys_DictionaryRepository(SysDbContext dbContext)
-        : base(dbContext)
+        public Sys_DictionaryRepository(ISqlSugarClient sqlSugar) : base(sqlSugar)
         {
 
-        }
-        public static ISys_DictionaryRepository Instance
-        {
-            get { return AutofacContainerModule.GetService<ISys_DictionaryRepository>(); }
         }
     }
 }

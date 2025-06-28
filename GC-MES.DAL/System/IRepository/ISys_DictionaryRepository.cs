@@ -1,7 +1,4 @@
-﻿/*
- *Author：COCO
- * 此代码由框架生成，请勿随意更改
- */
+﻿using GC_MES.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +7,9 @@ using System.Threading.Tasks;
 
 
 
-namespace GC_MES.System.IRepositories
+namespace GC_MES.DAL.System.IRepository
 {
-    public partial interface ISys_DictionaryRepository : IDependency,IRepository<Sys_Dictionary>
+    public  interface ISys_DictionaryRepository : IBaseRepository<Sys_Dictionary>
     {
     }
 }
