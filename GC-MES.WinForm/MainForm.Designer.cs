@@ -37,12 +37,11 @@ namespace GC_MES.WinForm.Forms
             btnMaximize = new Button();
             btnClose = new Button();
             lblTitle = new Label();
-            pnlContent = new Panel();
-            menu = new DMenu();
             pnlStatus = new Panel();
             lblStatus = new Label();
+            menu = new DMenu();
+            pnlContent = new Panel();
             pnlHeader.SuspendLayout();
-            pnlContent.SuspendLayout();
             pnlStatus.SuspendLayout();
             SuspendLayout();
             // 
@@ -134,35 +133,6 @@ namespace GC_MES.WinForm.Forms
             lblTitle.TabIndex = 0;
             lblTitle.Text = "GC-MES 系统";
             // 
-            // pnlContent
-            // 
-            pnlContent.BackColor = Color.White;
-            pnlContent.Controls.Add(menu);
-            pnlContent.Dock = DockStyle.Fill;
-            pnlContent.Location = new Point(0, 65);
-            pnlContent.Margin = new Padding(4);
-            pnlContent.Name = "pnlContent";
-            pnlContent.Size = new Size(1534, 904);
-            pnlContent.TabIndex = 2;
-            // 
-            // menu
-            // 
-            menu.BackColor = Color.FromArgb(45, 45, 48);
-            menu.Dock = DockStyle.Left;
-            menu.Font = new Font("Microsoft YaHei UI", 9F);
-            menu.ForeColor = Color.White;
-            menu.IconSize = new Size(24, 24);
-            menu.Location = new Point(0, 0);
-            menu.MenuBackColor = Color.FromArgb(45, 45, 48);
-            menu.MenuItemHoverColor = Color.FromArgb(55, 55, 58);
-            menu.MenuItemSelectedColor = Color.FromArgb(62, 62, 64);
-            menu.MenuTextColor = Color.White;
-            menu.Name = "menu";
-            menu.Size = new Size(177, 904);
-            menu.SubMenuIndicatorColor = Color.LightGray;
-            menu.TabIndex = 0;
-            menu.Text = "dMenu1";
-            // 
             // pnlStatus
             // 
             pnlStatus.BackColor = Color.FromArgb(45, 45, 48);
@@ -186,15 +156,45 @@ namespace GC_MES.WinForm.Forms
             lblStatus.TabIndex = 0;
             lblStatus.Text = "GC-MES 系统 | 就绪";
             // 
+            // menu
+            // 
+            menu.BackColor = Color.FromArgb(45, 45, 48);
+            menu.Dock = DockStyle.Left;
+            menu.Font = new Font("Microsoft YaHei UI", 9F);
+            menu.ForeColor = Color.White;
+            menu.IconSize = new Size(24, 24);
+            menu.Location = new Point(0, 65);
+            menu.MenuBackColor = Color.FromArgb(45, 45, 48);
+            menu.MenuItemHoverColor = Color.FromArgb(55, 55, 58);
+            menu.MenuItemSelectedColor = Color.FromArgb(62, 62, 64);
+            menu.MenuTextColor = Color.White;
+            menu.Name = "menu";
+            menu.Size = new Size(177, 904);
+            menu.SubMenuIndicatorColor = Color.LightGray;
+            menu.TabIndex = 5;
+            menu.Text = "dMenu1";
+            // 
+            // pnlContent
+            // 
+            pnlContent.BackColor = Color.White;
+            pnlContent.Dock = DockStyle.Fill;
+            pnlContent.Location = new Point(177, 65);
+            pnlContent.Margin = new Padding(4);
+            pnlContent.Name = "pnlContent";
+            pnlContent.Size = new Size(1357, 904);
+            pnlContent.TabIndex = 6;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1534, 995);
             Controls.Add(pnlContent);
+            Controls.Add(menu);
             Controls.Add(pnlStatus);
             Controls.Add(pnlHeader);
             FormBorderStyle = FormBorderStyle.None;
+            IsMdiContainer = true;
             Margin = new Padding(4);
             MinimumSize = new Size(931, 643);
             Name = "MainForm";
@@ -203,7 +203,6 @@ namespace GC_MES.WinForm.Forms
             Load += MainForm_Load;
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
-            pnlContent.ResumeLayout(false);
             pnlStatus.ResumeLayout(false);
             pnlStatus.PerformLayout();
             ResumeLayout(false);
@@ -216,10 +215,10 @@ namespace GC_MES.WinForm.Forms
         private System.Windows.Forms.Button btnMaximize;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblUserName;
         private DMenu menu;
+        private Panel pnlContent;
     }
 }

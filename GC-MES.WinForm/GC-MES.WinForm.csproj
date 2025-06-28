@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -52,8 +52,6 @@
     <Compile Remove="Forms\ThemeManager.cs" />
     <Compile Remove="Forms\UserEditForm.cs" />
     <Compile Remove="Forms\UserEditForm.Designer.cs" />
-    <Compile Remove="Forms\UserManagementForm.cs" />
-    <Compile Remove="Forms\UserManagementForm.Designer.cs" />
     <Compile Remove="Forms\WorkOrderManagementForm.cs" />
     <Compile Remove="Forms\WorkOrderManagementForm.Designer.cs" />
   </ItemGroup>
@@ -105,10 +103,6 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Forms\" />
   </ItemGroup>
 
 </Project>

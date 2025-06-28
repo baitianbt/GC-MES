@@ -139,6 +139,14 @@ namespace GC_MES.WinForm.Controls
             set => _showSubMenuOnClick = value;
         }
 
+        /// <summary>
+        /// 文本对齐方式
+        /// </summary>
+        [Category("外观")]
+        [Description("菜单文本对齐方式")]
+        [DefaultValue(StringAlignment.Center)]
+        public StringAlignment TextAlignment { get; set; } = StringAlignment.Center;
+
         #endregion
 
         #region 构造函数
@@ -272,7 +280,7 @@ namespace GC_MES.WinForm.Controls
                 var format = new StringFormat
                 {
                     LineAlignment = StringAlignment.Center,
-                    Alignment = StringAlignment.Near,
+                    Alignment = TextAlignment,
                     Trimming = StringTrimming.EllipsisCharacter
                 };
                 
@@ -646,7 +654,7 @@ namespace GC_MES.WinForm.Controls
                 var format = new StringFormat
                 {
                     LineAlignment = StringAlignment.Center,
-                    Alignment = StringAlignment.Near,
+                    Alignment = StringAlignment.Center,
                     Trimming = StringTrimming.EllipsisCharacter
                 };
                 

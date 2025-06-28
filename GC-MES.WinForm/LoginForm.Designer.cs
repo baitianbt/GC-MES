@@ -52,7 +52,7 @@ namespace GC_MES.WinForm.Forms
             // 
             // pnlHeader
             // 
-            pnlHeader.BackColor = Color.FromArgb(45, 63, 88);
+            pnlHeader.BackColor = Color.FromArgb(45, 45, 48);
             pnlHeader.Controls.Add(btnMinimize);
             pnlHeader.Controls.Add(btnClose);
             pnlHeader.Controls.Add(lblTitle);
@@ -143,7 +143,7 @@ namespace GC_MES.WinForm.Forms
             // btnCancel
             // 
             btnCancel.Anchor = AnchorStyles.Top;
-            btnCancel.BackColor = Color.FromArgb(45, 63, 88);
+            btnCancel.BackColor = Color.FromArgb(45, 45, 48);
             btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
@@ -174,7 +174,7 @@ namespace GC_MES.WinForm.Forms
             // btnLogin
             // 
             btnLogin.Anchor = AnchorStyles.Top;
-            btnLogin.BackColor = Color.FromArgb(45, 63, 88);
+            btnLogin.BackColor = Color.FromArgb(45, 45, 48);
             btnLogin.FlatAppearance.BorderSize = 0;
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);

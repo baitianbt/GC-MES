@@ -2,6 +2,7 @@ using GC_MES.BLL.System.IService;
 using GC_MES.BLL.System.Service;
 using GC_MES.WinForm.Common;
 using GC_MES.WinForm.Controls;
+using GC_MES.WinForm.Forms.SystemForm;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -20,8 +21,7 @@ namespace GC_MES.WinForm.Forms
     {
         ISys_MenuService sys_MenuService;
 
-        // 用于存储打开的窗体
-        private Dictionary<string, Form> openForms = new Dictionary<string, Form>();
+
 
         // 依赖注入
         public MainForm(ISys_MenuService sys_MenuService)
@@ -29,7 +29,7 @@ namespace GC_MES.WinForm.Forms
             this.sys_MenuService = sys_MenuService;
             InitializeComponent();
             InitialMenu();
-           
+
         }
 
         private void InitialMenu()
@@ -38,41 +38,66 @@ namespace GC_MES.WinForm.Forms
             AppInfo.Menus = sys_MenuService.Query();
 
 
+
+
+
+            #region 向主页添加菜单项
             var ParentMenus = AppInfo.Menus.FindAll(m => m.ParentId == 0);
             // 清空现有菜单项
             foreach (var ParentMenu in ParentMenus)
             {
                 // 添加一级菜单项
                 var parentItem = menu.AddItem(ParentMenu.MenuName);
-                parentItem.Click += (s, e) => 
-                { 
-                    // 处理点击事件，打开对应的窗体或执行其他操作
-                    if (!openForms.ContainsKey(ParentMenu.MenuName))
-                    {
-                        Form form = new Form(); // 替换为实际的窗体类
-                        form.Text = ParentMenu.MenuName;
-                        openForms[ParentMenu.MenuName] = form;
-                        form.Show();
-                    }
+                parentItem.Click += (s, e) =>
+                {
+                    MessageBox.Show("Test");
                 };
                 // 添加二级子菜单
                 var childMenus = AppInfo.Menus.FindAll(m => m.ParentId == ParentMenu.Menu_Id);
                 foreach (var childMenu in childMenus)
                 {
                     var childItem = parentItem.AddSubItem(childMenu.MenuName);
-                    childItem.Click += (s, e) => 
-                    { 
-                        // 处理点击事件，打开对应的窗体或执行其他操作
-                        if (!openForms.ContainsKey(childMenu.MenuName))
+                    childItem.Click += (s, e) =>
+                    {
+                        MessageBox.Show("T123est");
+                        // 反射获取窗体类型（命名空间+类名）
+                        var formType = Type.GetType("GC_MES.WinForm.Forms.SystemForm." + childMenu.Url);
+                        if (formType == null)
                         {
-                            Form form = new Form(); // 替换为实际的窗体类
-                            form.Text = childMenu.MenuName;
-                            openForms[childMenu.MenuName] = form;
-                            form.Show();
+                            MessageBox.Show($"未找到窗体类型：{childMenu.Url}");
+                            return;
                         }
+
+                        // 从服务容器中获取窗体实例
+                        var formInstance = Program.Services.GetRequiredService(formType) as Form;
+                        if (formInstance == null)
+                        {
+                            MessageBox.Show($"无法从 DI 获取窗体实例：{formType.FullName}");
+                            return;
+                        }
+                        // 如果已存在相同类型窗体则激活
+                        foreach (Control ctrl in pnlContent.Controls)
+                        {
+                            if (ctrl is Form form && form.GetType() == formType)
+                            {
+                                form.BringToFront();
+                                return;
+                            }
+                        }
+                       
+                        formInstance.TopLevel = false;
+                        formInstance.FormBorderStyle = FormBorderStyle.None;
+                        formInstance.Dock = DockStyle.Fill;
+                        pnlContent.Controls.Clear(); // 可选：只显示一个子窗体
+                        pnlContent.Controls.Add(formInstance);
+                        formInstance.Show();
+                      
+
                     };
                 }
             }
+
+            #endregion
 
         }
 
