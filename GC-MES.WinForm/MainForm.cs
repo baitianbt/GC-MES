@@ -21,25 +21,33 @@ namespace GC_MES.WinForm.Forms
     {
         ISys_MenuService sys_MenuService;
 
-
-
         // 依赖注入
         public MainForm(ISys_MenuService sys_MenuService)
         {
             this.sys_MenuService = sys_MenuService;
             InitializeComponent();
             InitialMenu();
-
+            
+            // 注册主题变更事件
+            ThemeManager.Instance.OnThemeChanged += ThemeManager_OnThemeChanged;
         }
 
         private void InitialMenu()
         {
+            var MainItem = menu.AddItem("首页");
+            MainItem.Click += (s, e) =>
+            {
+                var formInstance = Program.Services.GetRequiredService<ShowForm>();
+                labChildrenFormName.Text = "首页";
+                formInstance.TopLevel = false;
+                formInstance.FormBorderStyle = FormBorderStyle.None;
+                formInstance.Dock = DockStyle.Fill;
+                pnlContent.Controls.Clear(); // 可选：只显示一个子窗体
+                pnlContent.Controls.Add(formInstance);
+                formInstance.Show();
+            };
 
             AppInfo.Menus = sys_MenuService.Query();
-
-
-
-
 
             #region 向主页添加菜单项
             var ParentMenus = AppInfo.Menus.FindAll(m => m.ParentId == 0);
@@ -84,29 +92,25 @@ namespace GC_MES.WinForm.Forms
                                 return;
                             }
                         }
-                       labChildrenFormName.Text = ParentMenu.MenuName +" > "+ childMenu.MenuName;
+                        labChildrenFormName.Text = ParentMenu.MenuName + " > " + childMenu.MenuName;
                         formInstance.TopLevel = false;
                         formInstance.FormBorderStyle = FormBorderStyle.None;
                         formInstance.Dock = DockStyle.Fill;
                         pnlContent.Controls.Clear(); // 可选：只显示一个子窗体
                         pnlContent.Controls.Add(formInstance);
                         formInstance.Show();
-                      
-
+                        
+                        // 应用主题到子窗体
+                        ApplyThemeToChildForm(formInstance);
                     };
                 }
             }
 
             #endregion
-
         }
-
-
-
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
             // 添加拖动窗体的支持
             pnlHeader.MouseDown += PnlHeader_MouseDown;
             pnlHeader.MouseMove += PnlHeader_MouseMove;
@@ -118,10 +122,71 @@ namespace GC_MES.WinForm.Forms
 
             // 显示用户信息
             lblUserName.Text = AppInfo.CurrentUser.UserName;
-
-
-
-
+            
+            // 应用当前主题
+            ApplyCurrentTheme();
+        }
+        
+        /// <summary>
+        /// 应用当前主题到窗体
+        /// </summary>
+        private void ApplyCurrentTheme()
+        {
+            // 应用主题到主窗体
+            ThemeManager.Instance.ApplyTheme(this);
+            
+            // 更新菜单样式
+            ThemeManager.Instance.UpdateMenuStyle(menu);
+            
+            // 应用主题到已打开的子窗体
+            foreach (Control control in pnlContent.Controls)
+            {
+                if (control is Form form)
+                {
+                    ApplyThemeToChildForm(form);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 应用主题到子窗体
+        /// </summary>
+        /// <param name="form">子窗体</param>
+        private void ApplyThemeToChildForm(Form form)
+        {
+            ThemeManager.Instance.ApplyTheme(form);
+            
+            // 查找子窗体中的DataGridView并应用样式
+            foreach (Control control in form.Controls)
+            {
+                if (control is DataGridView dgv)
+                {
+                    ThemeManager.Instance.UpdateDataGridViewStyle(dgv);
+                }
+                else if (control is Panel panel)
+                {
+                    // 判断是否为工具栏Panel
+                    bool isToolbar = panel.Name?.ToLower().Contains("toolbar") == true || 
+                                    panel.Name?.ToLower().Contains("pnltool") == true;
+                    ThemeManager.Instance.UpdatePanelStyle(panel, isToolbar);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 主题更改事件处理
+        /// </summary>
+        private void ThemeManager_OnThemeChanged(object sender, EventArgs e)
+        {
+            // 在主线程上执行UI更新
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(ApplyCurrentTheme));
+            }
+            else
+            {
+                ApplyCurrentTheme();
+            }
         }
 
         private bool isDragging = false;
@@ -146,10 +211,19 @@ namespace GC_MES.WinForm.Forms
         {
             isDragging = false;
         }
+        
         private void btnSetting_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            // 显示设置窗体
+            var formInstance = Program.Services.GetRequiredService<SettingsForm>();
+            formInstance.TopLevel = true;
+            
+            // 首先应用当前主题到设置窗体
+            ThemeManager.Instance.ApplyTheme(formInstance);
+            
+            formInstance.ShowDialog();
         }
+        
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -167,12 +241,22 @@ namespace GC_MES.WinForm.Forms
         {
             Application.Exit();
         }
+   
 
-
-
-
-
-
-
+        /// <summary>
+        /// 重写窗体销毁方法，注销事件处理
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.Instance.OnThemeChanged -= ThemeManager_OnThemeChanged;
+            }
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
