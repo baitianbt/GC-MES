@@ -49,6 +49,8 @@
     <Compile Remove="Forms\RoutingEditForm.Designer.cs" />
     <Compile Remove="Forms\RoutingManagementForm.cs" />
     <Compile Remove="Forms\RoutingManagementForm.Designer.cs" />
+    <Compile Remove="Forms\SystemForm\SubForm\RoleEditForm.cs" />
+    <Compile Remove="Forms\SystemForm\SubForm\RoleEditForm.Designer.cs" />
     <Compile Remove="Forms\ThemeManager.cs" />
     <Compile Remove="Forms\UserEditForm.cs" />
     <Compile Remove="Forms\UserEditForm.Designer.cs" />
@@ -65,6 +67,7 @@
     <EmbeddedResource Remove="Forms\RoleEditForm.resx" />
     <EmbeddedResource Remove="Forms\RolePermissionForm.resx" />
     <EmbeddedResource Remove="Forms\RoutingManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\SystemForm\SubForm\RoleEditForm.resx" />
     <EmbeddedResource Remove="Forms\UserEditForm.resx" />
     <EmbeddedResource Remove="Forms\WorkOrderManagementForm.resx" />
   </ItemGroup>
@@ -86,6 +89,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.196" />
   </ItemGroup>
 
@@ -93,6 +100,7 @@
     <ProjectReference Include="..\GC-MES.BLL\GC-MES.BLL.csproj" />
     <ProjectReference Include="..\GC-MES.DAL\GC-MES.DAL.csproj" />
     <ProjectReference Include="..\GC-MES.Model\GC-MES.Model.csproj" />
+    <ProjectReference Include="..\GC-MES.Upgrade\GC-MES.Upgrade.csproj" />
   </ItemGroup>
 
   <ItemGroup>

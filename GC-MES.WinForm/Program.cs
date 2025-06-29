@@ -1,5 +1,9 @@
 ﻿using GC_MES.WinForm.Forms;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Core;
 using SqlSugar;
 using System.Reflection;
 
@@ -8,7 +12,7 @@ namespace GC_MES.WinForm
     public static class Program
     {
         public static IServiceProvider Services { get; private set; }
-
+        public static IConfiguration Configuration { get; private set; }
         [STAThread]
         static void Main()
         {
@@ -18,20 +22,90 @@ namespace GC_MES.WinForm
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
 
+
+
+
+
+
             // 创建服务容器
             var services = new ServiceCollection();
 
+            // 注册日志服务
+
+
+            string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
+            Directory.CreateDirectory(logFilePath); // 确保日志目录存在
+
+
+
+            // 配置 Serilog
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File(
+                    Path.Combine(logFilePath, "log-.txt"),
+                    rollingInterval: RollingInterval.Day,
+                    retainedFileCountLimit: 10,
+                    outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"
+                )
+                .CreateLogger();
+
+            // 注入 Serilog 到 Microsoft.Extensions.Logging
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.ClearProviders();
+                loggingBuilder.AddSerilog();
+            });
+
+
+
+            // 注册配置
+
+
+            // 加载 config.ini
+            //Configuration = new ConfigurationBuilder()
+            //    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            //    .AddIniFile("config.ini", optional: false, reloadOnChange: true)
+            //    .Build();
+
+
+            Configuration = new ConfigurationBuilder()
+      .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+      .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+      .Build();
+
+            services.AddSingleton<IConfiguration>(Configuration);
+
+
+
+
+
+
+
             // 注册 SqlSugar 配置
             services.AddScoped<ISqlSugarClient>(provider =>
-            {
+            {  // 获取日志服务
+                var logger = provider.GetRequiredService<ILogger<SqlSugarClient>>();
+                var config = provider.GetRequiredService<IConfiguration>();
+                var dbType = config["Connection:DBType"];
+                var connStr = config["Connection:DbConnectionString"];
+
+                if (string.IsNullOrEmpty(connStr))
+                {
+                    throw new Exception("未能读取到数据库连接字符串，请检查 appsettings.json 配置！");
+                }
                 var db = new SqlSugarClient(new ConnectionConfig
                 {
-                    ConnectionString = "Data Source=.;Initial Catalog=iMES_Open;Persist Security Info=True;User ID=sa;Password=123456;Connect Timeout=500;Encrypt=True;TrustServerCertificate=True;", // 设置数据库连接字符串
+                    ConnectionString = config["Connection:DbConnectionString"], // 设置数据库连接字符串
                     DbType = DbType.SqlServer, // 或其他数据库类型
                     IsAutoCloseConnection = true,
                     InitKeyType = InitKeyType.Attribute
                 });
-                db.Aop.OnLogExecuting = (sql, pars) => { /* 日志记录 */ };
+                db.Aop.OnLogExecuting = (sql, pars) => { logger.LogInformation("SQL: {sql} | Params: {params}", sql, pars); };
+                db.Aop.OnError = ex =>
+                {
+                    logger.LogError(ex, "SqlSugar 执行异常");
+                };
                 return db;
             });
 
@@ -121,7 +195,7 @@ namespace GC_MES.WinForm
                 // 加载BLL程序集
                 var servicesAssembly = Assembly.Load("GC-MES.BLL");
 
-                
+
 
                 var types = servicesAssembly.GetTypes();
                 var interfaces = servicesAssembly.GetTypes().Where(t => t.IsInterface).ToArray();
@@ -202,5 +276,47 @@ namespace GC_MES.WinForm
                 Application.Exit();
             }
         }
+
+
+        /// <summary>
+        /// 自动更新待测试
+        /// </summary>
+        /// <returns></returns>
+        private static async Task CheckForUpdatesAsync()
+        {
+            try
+            {
+                string serverUrl = "http://update.gc-mes.com"; // 可从配置获取
+                string mainExePath = Application.ExecutablePath;
+                Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
+                using (var updateManager = new GC_MES.Upgrade.UpdateManager(serverUrl, mainExePath, currentVersion))
+                {
+                    var result = await updateManager.CheckForUpdatesAsync();
+
+                    if (!result.Success)
+                    {
+                        MessageBox.Show($"检查更新失败: {result.ErrorMessage}", "更新错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    if (!result.HasUpdate)
+                    {
+                        MessageBox.Show("当前已经是最新版本。", "更新检查", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    using (var form = new GC_MES.Upgrade.UpdateProgressForm(updateManager, result.UpdateInfo))
+                    {
+                        form.ShowDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"检查更新时发生错误: {ex.Message}", "更新错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

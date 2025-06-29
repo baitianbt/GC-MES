@@ -32,7 +32,9 @@ namespace GC_MES.WinForm.Forms
         private void InitializeComponent()
         {
             pnlHeader = new Panel();
+            labChildrenFormName = new Label();
             lblUserName = new Label();
+            btnSetting = new Button();
             btnMinimize = new Button();
             btnMaximize = new Button();
             btnClose = new Button();
@@ -48,7 +50,9 @@ namespace GC_MES.WinForm.Forms
             // pnlHeader
             // 
             pnlHeader.BackColor = Color.FromArgb(45, 45, 48);
+            pnlHeader.Controls.Add(labChildrenFormName);
             pnlHeader.Controls.Add(lblUserName);
+            pnlHeader.Controls.Add(btnSetting);
             pnlHeader.Controls.Add(btnMinimize);
             pnlHeader.Controls.Add(btnMaximize);
             pnlHeader.Controls.Add(btnClose);
@@ -57,8 +61,19 @@ namespace GC_MES.WinForm.Forms
             pnlHeader.Location = new Point(0, 0);
             pnlHeader.Margin = new Padding(4);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(1534, 65);
+            pnlHeader.Size = new Size(1556, 65);
             pnlHeader.TabIndex = 0;
+            // 
+            // labChildrenFormName
+            // 
+            labChildrenFormName.AutoSize = true;
+            labChildrenFormName.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            labChildrenFormName.ForeColor = Color.White;
+            labChildrenFormName.Location = new Point(177, 20);
+            labChildrenFormName.Margin = new Padding(4, 0, 4, 0);
+            labChildrenFormName.Name = "labChildrenFormName";
+            labChildrenFormName.Size = new Size(0, 22);
+            labChildrenFormName.TabIndex = 5;
             // 
             // lblUserName
             // 
@@ -66,12 +81,28 @@ namespace GC_MES.WinForm.Forms
             lblUserName.AutoSize = true;
             lblUserName.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             lblUserName.ForeColor = Color.White;
-            lblUserName.Location = new Point(1289, 24);
+            lblUserName.Location = new Point(1299, 24);
             lblUserName.Margin = new Padding(4, 0, 4, 0);
             lblUserName.Name = "lblUserName";
             lblUserName.Size = new Size(44, 17);
             lblUserName.TabIndex = 4;
             lblUserName.Text = "用户名";
+            // 
+            // btnSetting
+            // 
+            btnSetting.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSetting.FlatAppearance.BorderSize = 0;
+            btnSetting.FlatStyle = FlatStyle.Flat;
+            btnSetting.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            btnSetting.ForeColor = Color.White;
+            btnSetting.Location = new Point(1369, 0);
+            btnSetting.Margin = new Padding(4);
+            btnSetting.Name = "btnSetting";
+            btnSetting.Size = new Size(47, 52);
+            btnSetting.TabIndex = 3;
+            btnSetting.Text = "⚙︎";
+            btnSetting.UseVisualStyleBackColor = false;
+            btnSetting.Click += btnSetting_Click;
             // 
             // btnMinimize
             // 
@@ -80,7 +111,7 @@ namespace GC_MES.WinForm.Forms
             btnMinimize.FlatStyle = FlatStyle.Flat;
             btnMinimize.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
             btnMinimize.ForeColor = Color.White;
-            btnMinimize.Location = new Point(1394, 0);
+            btnMinimize.Location = new Point(1416, 0);
             btnMinimize.Margin = new Padding(4);
             btnMinimize.Name = "btnMinimize";
             btnMinimize.Size = new Size(47, 52);
@@ -96,7 +127,7 @@ namespace GC_MES.WinForm.Forms
             btnMaximize.FlatStyle = FlatStyle.Flat;
             btnMaximize.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
             btnMaximize.ForeColor = Color.White;
-            btnMaximize.Location = new Point(1441, 0);
+            btnMaximize.Location = new Point(1463, 0);
             btnMaximize.Margin = new Padding(4);
             btnMaximize.Name = "btnMaximize";
             btnMaximize.Size = new Size(47, 52);
@@ -112,7 +143,7 @@ namespace GC_MES.WinForm.Forms
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(1488, 0);
+            btnClose.Location = new Point(1510, 0);
             btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(47, 52);
@@ -141,7 +172,7 @@ namespace GC_MES.WinForm.Forms
             pnlStatus.Location = new Point(0, 969);
             pnlStatus.Margin = new Padding(4);
             pnlStatus.Name = "pnlStatus";
-            pnlStatus.Size = new Size(1534, 26);
+            pnlStatus.Size = new Size(1556, 26);
             pnlStatus.TabIndex = 3;
             // 
             // lblStatus
@@ -181,14 +212,14 @@ namespace GC_MES.WinForm.Forms
             pnlContent.Location = new Point(177, 65);
             pnlContent.Margin = new Padding(4);
             pnlContent.Name = "pnlContent";
-            pnlContent.Size = new Size(1357, 904);
+            pnlContent.Size = new Size(1379, 904);
             pnlContent.TabIndex = 6;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1534, 995);
+            ClientSize = new Size(1556, 995);
             Controls.Add(pnlContent);
             Controls.Add(menu);
             Controls.Add(pnlStatus);
@@ -208,9 +239,12 @@ namespace GC_MES.WinForm.Forms
             ResumeLayout(false);
         }
 
+
+
         #endregion
 
         private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.Button btnSetting;
         private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Button btnMaximize;
         private System.Windows.Forms.Button btnClose;
@@ -220,5 +254,6 @@ namespace GC_MES.WinForm.Forms
         private System.Windows.Forms.Label lblUserName;
         private DMenu menu;
         private Panel pnlContent;
+        private Label labChildrenFormName;
     }
 }

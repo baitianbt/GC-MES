@@ -84,7 +84,7 @@ namespace GC_MES.WinForm.Forms
                                 return;
                             }
                         }
-                       
+                       labChildrenFormName.Text = ParentMenu.MenuName +" > "+ childMenu.MenuName;
                         formInstance.TopLevel = false;
                         formInstance.FormBorderStyle = FormBorderStyle.None;
                         formInstance.Dock = DockStyle.Fill;
@@ -117,7 +117,7 @@ namespace GC_MES.WinForm.Forms
             lblTitle.MouseUp += PnlHeader_MouseUp;
 
             // 显示用户信息
-            lblUserName.Text = "管理员";
+            lblUserName.Text = AppInfo.CurrentUser.UserName;
 
 
 
@@ -146,7 +146,10 @@ namespace GC_MES.WinForm.Forms
         {
             isDragging = false;
         }
-
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;

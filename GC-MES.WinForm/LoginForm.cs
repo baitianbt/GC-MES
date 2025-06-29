@@ -17,15 +17,17 @@ namespace GC_MES.WinForm.Forms
 
         private ISys_UserService sys_UserService;
 
-
+        private readonly ILogger<LoginForm> _logger;
 
 
         // 依赖注入
-        public LoginForm(ISys_UserService sys_UserService)
+        public LoginForm(ISys_UserService sys_UserService, ILogger<LoginForm> logger)
         {
             this.sys_UserService = sys_UserService;
+            this._logger = logger;
 
             InitializeComponent();
+            _logger.LogInformation("LoginForm initialized.");
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

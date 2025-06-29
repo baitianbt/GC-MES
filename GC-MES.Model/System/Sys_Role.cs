@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SqlSugar;
 
 
 namespace GC_MES.Model.System
@@ -109,6 +110,9 @@ namespace GC_MES.Model.System
         [Column(TypeName = "tinyint")]
         [Editable(true)]
         public byte? Enable { get; set; }
+
+
+        [SugarColumn(IsIgnore = true)]
         [ForeignKey("Role_Id")]
         public List<Sys_RoleAuth> RoleAuths { get; set; }
 
