@@ -47,6 +47,25 @@ namespace GC_MES.WinForm.Forms
                 formInstance.Show();
             };
 
+            var DevelopItem = menu.AddItem("开发者功能");
+
+           var CodeGeneratorItem =  DevelopItem.AddSubItem("代码生成器");
+
+            CodeGeneratorItem.Click += (s, e) =>
+            {
+                var formInstance = Program.Services.GetRequiredService<CodeGeneratorForm>();
+                labChildrenFormName.Text = "开发者功能 > 代码生成器";
+                formInstance.TopLevel = false;
+                formInstance.FormBorderStyle = FormBorderStyle.None;
+                formInstance.Dock = DockStyle.Fill;
+                pnlContent.Controls.Clear(); // 可选：只显示一个子窗体
+                pnlContent.Controls.Add(formInstance);
+                formInstance.Show();
+            };
+
+
+
+
             AppInfo.Menus = sys_MenuService.Query();
 
             #region 向主页添加菜单项

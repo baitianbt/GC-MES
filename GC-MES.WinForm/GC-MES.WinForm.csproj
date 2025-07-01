@@ -49,6 +49,20 @@
     <Compile Remove="Forms\RoutingEditForm.Designer.cs" />
     <Compile Remove="Forms\RoutingManagementForm.cs" />
     <Compile Remove="Forms\RoutingManagementForm.Designer.cs" />
+    <Compile Remove="Forms\SystemForm\DeptManagementForm.cs" />
+    <Compile Remove="Forms\SystemForm\DeptManagementForm.Designer.cs" />
+    <Compile Remove="Forms\SystemForm\DictionaryManagementForm.cs" />
+    <Compile Remove="Forms\SystemForm\DictionaryManagementForm.Designer.cs" />
+    <Compile Remove="Forms\SystemForm\LogManagementForm.cs" />
+    <Compile Remove="Forms\SystemForm\LogManagementForm.Designer.cs" />
+    <Compile Remove="Forms\SystemForm\MenuManagementForm.cs" />
+    <Compile Remove="Forms\SystemForm\MenuManagementForm.Designer.cs" />
+    <Compile Remove="Forms\SystemForm\SubForm\DictionaryEditForm.cs" />
+    <Compile Remove="Forms\SystemForm\SubForm\DictionaryEditForm.Designer.cs" />
+    <Compile Remove="Forms\SystemForm\SubForm\DictionaryItemEditForm.cs" />
+    <Compile Remove="Forms\SystemForm\SubForm\DictionaryItemEditForm.Designer.cs" />
+    <Compile Remove="Forms\SystemForm\SubForm\MenuEditForm.cs" />
+    <Compile Remove="Forms\SystemForm\SubForm\MenuEditForm.Designer.cs" />
     <Compile Remove="Forms\SystemForm\SubForm\RoleEditForm.cs" />
     <Compile Remove="Forms\SystemForm\SubForm\RoleEditForm.Designer.cs" />
     <Compile Remove="Forms\ThemeManager.cs" />
@@ -67,6 +81,13 @@
     <EmbeddedResource Remove="Forms\RoleEditForm.resx" />
     <EmbeddedResource Remove="Forms\RolePermissionForm.resx" />
     <EmbeddedResource Remove="Forms\RoutingManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\SystemForm\DeptManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\SystemForm\DictionaryManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\SystemForm\LogManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\SystemForm\MenuManagementForm.resx" />
+    <EmbeddedResource Remove="Forms\SystemForm\SubForm\DictionaryEditForm.resx" />
+    <EmbeddedResource Remove="Forms\SystemForm\SubForm\DictionaryItemEditForm.resx" />
+    <EmbeddedResource Remove="Forms\SystemForm\SubForm\MenuEditForm.resx" />
     <EmbeddedResource Remove="Forms\SystemForm\SubForm\RoleEditForm.resx" />
     <EmbeddedResource Remove="Forms\UserEditForm.resx" />
     <EmbeddedResource Remove="Forms\WorkOrderManagementForm.resx" />
@@ -77,6 +98,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.6" />
@@ -89,6 +111,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.6" />
+    <PackageReference Include="NPOI" Version="2.7.4" />
     <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />

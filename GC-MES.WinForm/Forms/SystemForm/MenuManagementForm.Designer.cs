@@ -1,7 +1,6 @@
 ﻿namespace GC_MES.WinForm.Forms.SystemForm
 {
-
-    partial class RoleManagementForm
+    partial class MenuManagementForm
     {
         /// <summary>
         /// 必需的设计器变量
@@ -32,7 +31,7 @@
             pnlSearch = new Panel();
             btnClear = new Button();
             btnSearch = new Button();
-            cmbDept = new ComboBox();
+            cmbParent = new ComboBox();
             label2 = new Label();
             txtSearchName = new TextBox();
             label1 = new Label();
@@ -43,11 +42,12 @@
             btnDelete = new Button();
             btnEdit = new Button();
             btnAdd = new Button();
-            dgvRoles = new DataGridView();
-            colRoleId = new DataGridViewTextBoxColumn();
-            colRoleName = new DataGridViewTextBoxColumn();
+            dgvMenus = new DataGridView();
+            colMenuId = new DataGridViewTextBoxColumn();
+            colMenuName = new DataGridViewTextBoxColumn();
             colParentId = new DataGridViewTextBoxColumn();
-            colDeptName = new DataGridViewTextBoxColumn();
+            colIcon = new DataGridViewTextBoxColumn();
+            colUrl = new DataGridViewTextBoxColumn();
             colOrderNo = new DataGridViewTextBoxColumn();
             colEnable = new DataGridViewCheckBoxColumn();
             colCreateDate = new DataGridViewTextBoxColumn();
@@ -59,7 +59,7 @@
             btnFirstPage = new Button();
             pnlSearch.SuspendLayout();
             pnlToolbar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvRoles).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMenus).BeginInit();
             pnlPager.SuspendLayout();
             SuspendLayout();
             // 
@@ -68,13 +68,13 @@
             pnlSearch.BackColor = Color.FromArgb(250, 250, 250);
             pnlSearch.Controls.Add(btnClear);
             pnlSearch.Controls.Add(btnSearch);
-            pnlSearch.Controls.Add(cmbDept);
+            pnlSearch.Controls.Add(cmbParent);
             pnlSearch.Controls.Add(label2);
             pnlSearch.Controls.Add(txtSearchName);
             pnlSearch.Controls.Add(label1);
             pnlSearch.Dock = DockStyle.Top;
             pnlSearch.Location = new Point(10, 10);
-            pnlSearch.Margin = new Padding(4, 4, 4, 4);
+            pnlSearch.Margin = new Padding(4);
             pnlSearch.Name = "pnlSearch";
             pnlSearch.Size = new Size(1473, 113);
             pnlSearch.TabIndex = 1;
@@ -86,7 +86,7 @@
             btnClear.FlatStyle = FlatStyle.Flat;
             btnClear.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnClear.Location = new Point(688, 42);
-            btnClear.Margin = new Padding(4, 4, 4, 4);
+            btnClear.Margin = new Padding(4);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(88, 40);
             btnClear.TabIndex = 5;
@@ -101,23 +101,23 @@
             btnSearch.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnSearch.ForeColor = Color.White;
             btnSearch.Location = new Point(583, 42);
-            btnSearch.Margin = new Padding(4, 4, 4, 4);
+            btnSearch.Margin = new Padding(4);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(88, 40);
             btnSearch.TabIndex = 4;
             btnSearch.Text = "搜索";
             btnSearch.UseVisualStyleBackColor = false;
             // 
-            // cmbDept
+            // cmbParent
             // 
-            cmbDept.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbDept.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            cmbDept.FormattingEnabled = true;
-            cmbDept.Location = new Point(373, 42);
-            cmbDept.Margin = new Padding(4, 4, 4, 4);
-            cmbDept.Name = "cmbDept";
-            cmbDept.Size = new Size(174, 25);
-            cmbDept.TabIndex = 3;
+            cmbParent.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbParent.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            cmbParent.FormattingEnabled = true;
+            cmbParent.Location = new Point(373, 42);
+            cmbParent.Margin = new Padding(4);
+            cmbParent.Name = "cmbParent";
+            cmbParent.Size = new Size(174, 25);
+            cmbParent.TabIndex = 3;
             // 
             // label2
             // 
@@ -128,14 +128,14 @@
             label2.Name = "label2";
             label2.Size = new Size(44, 17);
             label2.TabIndex = 2;
-            label2.Text = "部门：";
+            label2.Text = "父级：";
             // 
             // txtSearchName
             // 
             txtSearchName.BorderStyle = BorderStyle.FixedSingle;
             txtSearchName.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             txtSearchName.Location = new Point(128, 42);
-            txtSearchName.Margin = new Padding(4, 4, 4, 4);
+            txtSearchName.Margin = new Padding(4);
             txtSearchName.Name = "txtSearchName";
             txtSearchName.Size = new Size(175, 23);
             txtSearchName.TabIndex = 1;
@@ -149,7 +149,7 @@
             label1.Name = "label1";
             label1.Size = new Size(68, 17);
             label1.TabIndex = 0;
-            label1.Text = "角色名称：";
+            label1.Text = "菜单名称：";
             // 
             // pnlToolbar
             // 
@@ -162,7 +162,7 @@
             pnlToolbar.Controls.Add(btnAdd);
             pnlToolbar.Dock = DockStyle.Top;
             pnlToolbar.Location = new Point(10, 123);
-            pnlToolbar.Margin = new Padding(4, 4, 4, 4);
+            pnlToolbar.Margin = new Padding(4);
             pnlToolbar.Name = "pnlToolbar";
             pnlToolbar.Size = new Size(1473, 71);
             pnlToolbar.TabIndex = 2;
@@ -175,7 +175,7 @@
             btnExportPDF.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnExportPDF.ForeColor = Color.White;
             btnExportPDF.Location = new Point(595, 17);
-            btnExportPDF.Margin = new Padding(4, 4, 4, 4);
+            btnExportPDF.Margin = new Padding(4);
             btnExportPDF.Name = "btnExportPDF";
             btnExportPDF.Size = new Size(105, 40);
             btnExportPDF.TabIndex = 5;
@@ -190,7 +190,7 @@
             btnExport.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnExport.ForeColor = Color.White;
             btnExport.Location = new Point(478, 17);
-            btnExport.Margin = new Padding(4, 4, 4, 4);
+            btnExport.Margin = new Padding(4);
             btnExport.Name = "btnExport";
             btnExport.Size = new Size(105, 40);
             btnExport.TabIndex = 4;
@@ -205,7 +205,7 @@
             btnImport.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnImport.ForeColor = Color.White;
             btnImport.Location = new Point(362, 17);
-            btnImport.Margin = new Padding(4, 4, 4, 4);
+            btnImport.Margin = new Padding(4);
             btnImport.Name = "btnImport";
             btnImport.Size = new Size(105, 40);
             btnImport.TabIndex = 3;
@@ -220,7 +220,7 @@
             btnDelete.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnDelete.ForeColor = Color.White;
             btnDelete.Location = new Point(245, 17);
-            btnDelete.Margin = new Padding(4, 4, 4, 4);
+            btnDelete.Margin = new Padding(4);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(105, 40);
             btnDelete.TabIndex = 2;
@@ -235,7 +235,7 @@
             btnEdit.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnEdit.ForeColor = Color.White;
             btnEdit.Location = new Point(128, 17);
-            btnEdit.Margin = new Padding(4, 4, 4, 4);
+            btnEdit.Margin = new Padding(4);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(105, 40);
             btnEdit.TabIndex = 1;
@@ -250,70 +250,48 @@
             btnAdd.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnAdd.ForeColor = Color.White;
             btnAdd.Location = new Point(12, 17);
-            btnAdd.Margin = new Padding(4, 4, 4, 4);
+            btnAdd.Margin = new Padding(4);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(105, 40);
             btnAdd.TabIndex = 0;
             btnAdd.Text = "新增";
             btnAdd.UseVisualStyleBackColor = false;
             // 
-            // dgvRoles
+            // dgvMenus
             // 
-            dgvRoles.AllowUserToAddRows = false;
-            dgvRoles.AllowUserToDeleteRows = false;
-            dgvRoles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvRoles.BackgroundColor = Color.White;
-            dgvRoles.BorderStyle = BorderStyle.None;
-            dgvRoles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRoles.Columns.AddRange(new DataGridViewColumn[] { colRoleId, colRoleName, colParentId, colDeptName, colOrderNo, colEnable, colCreateDate });
-            dgvRoles.Dock = DockStyle.Fill;
-            dgvRoles.Location = new Point(10, 194);
-            dgvRoles.Margin = new Padding(4, 4, 4, 4);
-            dgvRoles.MultiSelect = false;
-            dgvRoles.Name = "dgvRoles";
-            dgvRoles.ReadOnly = true;
-            dgvRoles.RowHeadersVisible = false;
-            dgvRoles.RowTemplate.Height = 30;
-            dgvRoles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRoles.Size = new Size(1473, 717);
-            dgvRoles.TabIndex = 3;
-
-
-            // 设置列头样式
-            dgvRoles.EnableHeadersVisualStyles = false;
-            dgvRoles.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(45, 45, 48);
-            dgvRoles.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvRoles.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, FontStyle.Regular);
-            dgvRoles.ColumnHeadersHeight = 40;
-
-            // 设置行样式
-            dgvRoles.RowsDefaultCellStyle.BackColor = Color.White;
-            dgvRoles.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250);
-            dgvRoles.DefaultCellStyle.SelectionBackColor = Color.FromArgb(67, 67, 70);
-            dgvRoles.DefaultCellStyle.SelectionForeColor = Color.White;
-            dgvRoles.RowTemplate.Height = 36;
-
-            // 设置边框和网格线
-            dgvRoles.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dgvRoles.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvRoles.GridColor = Color.FromArgb(230, 230, 230);
-
-
+            dgvMenus.AllowUserToAddRows = false;
+            dgvMenus.AllowUserToDeleteRows = false;
+            dgvMenus.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvMenus.BackgroundColor = Color.White;
+            dgvMenus.BorderStyle = BorderStyle.None;
+            dgvMenus.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvMenus.Columns.AddRange(new DataGridViewColumn[] { colMenuId, colMenuName, colParentId, colIcon, colUrl, colOrderNo, colEnable, colCreateDate });
+            dgvMenus.Dock = DockStyle.Fill;
+            dgvMenus.Location = new Point(10, 194);
+            dgvMenus.Margin = new Padding(4);
+            dgvMenus.MultiSelect = false;
+            dgvMenus.Name = "dgvMenus";
+            dgvMenus.ReadOnly = true;
+            dgvMenus.RowHeadersVisible = false;
+            dgvMenus.RowTemplate.Height = 30;
+            dgvMenus.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMenus.Size = new Size(1473, 717);
+            dgvMenus.TabIndex = 3;
             // 
-            // colRoleId
+            // colMenuId
             // 
-            colRoleId.DataPropertyName = "Role_Id";
-            colRoleId.HeaderText = "ID";
-            colRoleId.Name = "colRoleId";
-            colRoleId.ReadOnly = true;
-            colRoleId.Visible = false;
+            colMenuId.DataPropertyName = "Menu_Id";
+            colMenuId.HeaderText = "ID";
+            colMenuId.Name = "colMenuId";
+            colMenuId.ReadOnly = true;
+            colMenuId.Visible = false;
             // 
-            // colRoleName
+            // colMenuName
             // 
-            colRoleName.DataPropertyName = "RoleName";
-            colRoleName.HeaderText = "角色名称";
-            colRoleName.Name = "colRoleName";
-            colRoleName.ReadOnly = true;
+            colMenuName.DataPropertyName = "MenuName";
+            colMenuName.HeaderText = "菜单名称";
+            colMenuName.Name = "colMenuName";
+            colMenuName.ReadOnly = true;
             // 
             // colParentId
             // 
@@ -322,12 +300,19 @@
             colParentId.Name = "colParentId";
             colParentId.ReadOnly = true;
             // 
-            // colDeptName
+            // colIcon
             // 
-            colDeptName.DataPropertyName = "DeptName";
-            colDeptName.HeaderText = "部门";
-            colDeptName.Name = "colDeptName";
-            colDeptName.ReadOnly = true;
+            colIcon.DataPropertyName = "Icon";
+            colIcon.HeaderText = "图标";
+            colIcon.Name = "colIcon";
+            colIcon.ReadOnly = true;
+            // 
+            // colUrl
+            // 
+            colUrl.DataPropertyName = "Url";
+            colUrl.HeaderText = "URL";
+            colUrl.Name = "colUrl";
+            colUrl.ReadOnly = true;
             // 
             // colOrderNo
             // 
@@ -360,7 +345,7 @@
             pnlPager.Controls.Add(btnFirstPage);
             pnlPager.Dock = DockStyle.Bottom;
             pnlPager.Location = new Point(10, 911);
-            pnlPager.Margin = new Padding(4, 4, 4, 4);
+            pnlPager.Margin = new Padding(4);
             pnlPager.Name = "pnlPager";
             pnlPager.Size = new Size(1473, 71);
             pnlPager.TabIndex = 4;
@@ -383,7 +368,7 @@
             btnLastPage.FlatStyle = FlatStyle.Flat;
             btnLastPage.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnLastPage.Location = new Point(183, 17);
-            btnLastPage.Margin = new Padding(4, 4, 4, 4);
+            btnLastPage.Margin = new Padding(4);
             btnLastPage.Name = "btnLastPage";
             btnLastPage.Size = new Size(41, 40);
             btnLastPage.TabIndex = 3;
@@ -397,7 +382,7 @@
             btnNextPage.FlatStyle = FlatStyle.Flat;
             btnNextPage.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnNextPage.Location = new Point(126, 17);
-            btnNextPage.Margin = new Padding(4, 4, 4, 4);
+            btnNextPage.Margin = new Padding(4);
             btnNextPage.Name = "btnNextPage";
             btnNextPage.Size = new Size(41, 40);
             btnNextPage.TabIndex = 2;
@@ -411,7 +396,7 @@
             btnPrevPage.FlatStyle = FlatStyle.Flat;
             btnPrevPage.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             btnPrevPage.Location = new Point(69, 17);
-            btnPrevPage.Margin = new Padding(4, 4, 4, 4);
+            btnPrevPage.Margin = new Padding(4);
             btnPrevPage.Name = "btnPrevPage";
             btnPrevPage.Size = new Size(41, 40);
             btnPrevPage.TabIndex = 1;
@@ -423,44 +408,43 @@
             btnFirstPage.BackColor = Color.FromArgb(230, 230, 230);
             btnFirstPage.FlatAppearance.BorderColor = Color.FromArgb(210, 210, 210);
             btnFirstPage.FlatStyle = FlatStyle.Flat;
-            btnFirstPage.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            btnFirstPage.Location = new Point(12, 17);
-            btnFirstPage.Margin = new Padding(4, 4, 4, 4);
+            btnFirstPage.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 134); btnFirstPage.Location = new Point(12, 17);
+            btnFirstPage.Margin = new Padding(4);
             btnFirstPage.Name = "btnFirstPage";
             btnFirstPage.Size = new Size(41, 40);
             btnFirstPage.TabIndex = 0;
             btnFirstPage.Text = "|<";
             btnFirstPage.UseVisualStyleBackColor = false;
             // 
-            // RoleManagementForm
+            // MenuManagementForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1493, 992);
-            Controls.Add(dgvRoles);
+            Controls.Add(dgvMenus);
             Controls.Add(pnlPager);
             Controls.Add(pnlToolbar);
             Controls.Add(pnlSearch);
-            Margin = new Padding(4, 4, 4, 4);
-            Name = "RoleManagementForm";
+            Margin = new Padding(4);
+            Name = "MenuManagementForm";
             Padding = new Padding(10);
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "角色管理";
+            Text = "菜单管理";
+            Load += MenuManagementForm_Load;
             pnlSearch.ResumeLayout(false);
             pnlSearch.PerformLayout();
             pnlToolbar.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvRoles).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMenus).EndInit();
             pnlPager.ResumeLayout(false);
             pnlPager.PerformLayout();
             ResumeLayout(false);
-
         }
 
         #endregion
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.ComboBox cmbDept;
+        private System.Windows.Forms.ComboBox cmbParent;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtSearchName;
         private System.Windows.Forms.Label label1;
@@ -471,17 +455,18 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridView dgvRoles;
+        private System.Windows.Forms.DataGridView dgvMenus;
         private System.Windows.Forms.Panel pnlPager;
         private System.Windows.Forms.Label lblPageInfo;
         private System.Windows.Forms.Button btnLastPage;
         private System.Windows.Forms.Button btnNextPage;
         private System.Windows.Forms.Button btnPrevPage;
         private System.Windows.Forms.Button btnFirstPage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRoleId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRoleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMenuId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMenuName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colParentId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeptName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIcon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUrl;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colEnable;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;

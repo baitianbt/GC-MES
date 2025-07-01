@@ -302,7 +302,7 @@ namespace GC_MES.Upgrade
                 {
                     Directory.Delete(extractDir, true);
                 }
-                
+                    
                 Directory.CreateDirectory(extractDir);
                 
                 OnInstallProgressChanged(new InstallProgressEventArgs
@@ -335,7 +335,7 @@ namespace GC_MES.Upgrade
                 // 重启应用程序
                 if (!string.IsNullOrEmpty(_mainExePath) && File.Exists(_mainExePath))
                 {
-                    Process.Start(_mainExePath);
+                Process.Start(_mainExePath);
                 }
                 
                 return new InstallResult
@@ -462,7 +462,7 @@ namespace GC_MES.Upgrade
                 
                 if (shouldExclude)
                     continue;
-                
+                    
                 string relativePath = GetRelativePath(file, baseDir);
                 string targetPath = Path.Combine(backupPath, relativePath);
                 
@@ -471,7 +471,7 @@ namespace GC_MES.Upgrade
                 {
                     Directory.CreateDirectory(targetDir);
                 }
-                
+                    
                 File.Copy(file, targetPath);
             }
         }
@@ -508,7 +508,7 @@ namespace GC_MES.Upgrade
                 {
                     Directory.CreateDirectory(targetDir);
                 }
-                
+                    
                 if (File.Exists(targetPath))
                 {
                     // 对于配置文件，可能需要保留用户配置
@@ -526,10 +526,10 @@ namespace GC_MES.Upgrade
                     }
                     else
                     {
-                        File.Delete(targetPath);
+                    File.Delete(targetPath);
                     }
                 }
-                
+                    
                 File.Copy(file, targetPath);
             }
         }

@@ -61,8 +61,9 @@ namespace GC_MES.WinForm.Common
             SecondaryColor = Color.FromArgb(67, 67, 70),
             AccentColor = Color.FromArgb(0, 122, 204),
             TextColor = Color.White,
-            BackgroundColor = Color.FromArgb(30, 30, 30),
-            PanelBackColor = Color.FromArgb(240, 240, 240),
+            //BackgroundColor = Color.FromArgb(30, 30, 30)
+            BackgroundColor = Color.FromArgb(240, 242, 245),
+            PanelBackColor = Color.FromArgb(250, 250, 250),
             ButtonPrimaryColor = Color.FromArgb(45, 45, 48),
             ButtonSecondaryColor = Color.FromArgb(67, 67, 70),
             ButtonDangerColor = Color.FromArgb(159, 68, 74),
@@ -381,6 +382,7 @@ namespace GC_MES.WinForm.Common
         {
             try
             {
+                // 待修改到系统配置文件中
                 string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "theme.config");
                 
                 using (StreamWriter writer = new StreamWriter(configFile))
@@ -401,6 +403,7 @@ namespace GC_MES.WinForm.Common
         {
             try
             {
+                // 待修改到系统配置文件中
                 string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "theme.config");
                 
                 if (File.Exists(configFile))
