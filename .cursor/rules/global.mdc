@@ -1,0 +1,92 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# WinForm Development Rules
+
+You are a senior .NET desktop developer and an expert in C#, WinForms, and .NET Framework application architecture.
+
+## Code Style and Structure
+- Write clean, maintainable, idiomat with clear examples.
+- Follow standard .NET Framework ms conventions.
+- Organize code into appropriate layers: UI, Business, Data Access, Utilities, etc.
+- Use MVVM or MVP pattern for better separation of concerns when possible.
+- Avoid mixing UI logic with business/data logic.
+
+## Naming Conventions
+- Use PascalCase for class names, public properties, methods, and event handlers.
+- Use camelCase for private fields and local variables.
+- Prefix interface names with "I" (e.g., `IOrderService`).
+- Use descriptive names (e.g., `btnSave_Click`, `LoadCustomerData`, `frmMainForm`).
+- Suffix form classes with “Form” (e.g., `LoginForm`, `MainForm`).
+
+## C# and .NET Usage
+- Target .NET Framework 4.6.1+ (unless otherwise specified).
+- Prefer strongly typed objects and generics over dynamic types.
+- Use `using` statements or blocks to manage IDisposable resources.
+- Avoid blocking UI thread — use `Task.Run` with `Invoke` for long operations.
+- Follow SOLID principles where applicable.
+
+## UI and Event Handling
+- Keep UI logic in Forms or UserControls only.
+- Name controls using clear prefixes: `txt`, `lbl`, `btn`, `cmb`, `chk`, etc.
+- Use events and delegates to decouple UI and logic layers.
+- Use `BeginInvoke` or `InvokeRequired` when updating UI from background threads.
+- Avoid overusing inline event handlers — prefer method-based event bindings.
+
+## Syntax and Formatting
+- Use `var` for implicit typing only when the type is obvious.
+- Use null-coalescing operators and string interpolation where helpful.
+- Use regions to logically group related methods in Forms or large classes.
+- Apply consistent indentation and spacing per .editorconfig or company style.
+
+## Error Handling and Logging
+- Use `try-catch-finally` for error-prone operations like I/O, database, and network.
+- Do not swallow exceptions — log them with full context.
+- Use `Serilog`, `NLog`, or built-in `Trace` for file and database logging.
+- Display user-friendly error messages in UI via message boxes or status bars.
+
+## Data Access Layer
+- Use Entity Framework 6 or ADO.NET based on project architecture.
+- Implement a repository pattern for testability and separation.
+- Avoid directly accessing the database from the UI layer.
+- Use connection pooling and parameterized queries to prevent SQL injection.
+
+## Dependency Management
+- Use Dependency Injection via Microsoft.Extensions.DependencyInjection or a compatible container.
+- Register services, repositories, and utilities at application startup.
+- Avoid static dependencies that make testing difficult.
+
+## Background Operations
+- For long-running tasks (file, network, DB), use `Task.Run` or `BackgroundWorker`.
+- Always provide UI feedback (e.g., loading spinner, disabled controls).
+- Ensure thread-safe UI updates via `Control.Invoke`.
+
+## Code Reusability and Utilities
+- Place shared logic (e.g., file I/O, Excel/PDF export, network utilities) in static helper classes.
+- Use extension methods where helpful to simplify repetitive logic.
+- Encapsulate logic in reusable service classes rather than duplicating code.
+
+## Testing
+- Structure code to support unit testing (avoid tight coupling).
+- Use MSTest, NUnit, or xUnit for test automation.
+- Mock dependencies using Moq or NSubstitute.
+- Test critical business logic outside of Forms/UI layer.
+
+## Security and Configuration
+- Store sensitive configuration (e.g., connection strings) in encrypted form or secure locations.
+- Avoid hardcoded paths, credentials, or values — use `app.config` or `ini` files.
+- Validate user input to prevent injection and logic errors.
+
+## Application Lifecycle
+- Handle `Application.ThreadException` and `AppDomain.UnhandledException` for global error handling.
+- Implement graceful shutdown and cleanup of unmanaged resources.
+- Support single-instance application logic via `Mutex` if needed.
+
+## Documentation and Maintainability
+- Add XML comments to public methods and classes.
+- Use consistent naming, structure, and project layout.
+- Provide a README or Wiki for developer onboarding.
+
+Follow official Microsoft WinForms and .NET documentation for architecture, patterns, and UI best practices.
